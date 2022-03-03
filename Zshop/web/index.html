@@ -20,7 +20,7 @@ and open the template in the editor.
     <div class="">
         <div class="header  ">
             <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(248, 42, 42);">
-                <div class="container-fluid  ">
+                <div class="container-fluid  " style="display: flex!important; justify-content: space-between!important ;">
 
                   <!-- logo của shop -->
                   <div class="navbar-collapse logo col-lg-3 col-sm-2 navbar-nav" >
@@ -35,20 +35,13 @@ and open the template in the editor.
                         
                         <a class="" href="#" style="padding-left: 4%;">
                             <a style="font-size: 30px; color:white ;">Zshop</a>
+                            <!-- <img src="" width="500" height="600"> -->
                         </a>
                   </div>
                     
-
-
-
-
-
-
-
-
                     <!-- tìm kiếm của -->
-                    <div class="collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent">
-                        <form class="d-flex search">
+                    <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent">
+                        <form class="d-flex ">
                             <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
                                 aria-label="Search" style="width: 400px;">
                             <button class="btn " type="submit"
@@ -57,7 +50,7 @@ and open the template in the editor.
                     </div>
 
                     <!-- Giỏ hành và account -->
-                    <div class=" navbar-collapse collapse" style="margin-left: 7%;" >
+                    <div class="account navbar-collapse collapse" >
                         <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 7%; " width="25" height="25" fill="white" class="bi bi-bag-check" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
                             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
@@ -77,13 +70,115 @@ and open the template in the editor.
             
         </div>
         <section class="footer"  >
-            <div class="">abc</div>
+            <div class="container py-5">abc</div>
         </section>
        
             
 
     </div>
 
+</body>
+
+<body>
+    <footer class="site-footer background-black-2">
+            <img src="./images/shapes/footer-bg-1-1.png" alt="" class="site-footer__shape-1">
+            <img src="./images/shapes/footer-bg-1-2.png" alt="" class="site-footer__shape-2">
+            <div class="container">
+                <div class="row" >
+                    <div style="margin-right: -100px;" class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-widget footer-widget__about-widget">
+                            <a href="index.html" class="footer-widget__logo">
+                                <img src="./images/logo-light.png" alt="" width="105" height="43">
+                            </a>
+                            <p class="thm-text-dark"></p>
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 -->
+                    <div style="margin-right: 50px;"class="col-sm-12 col-md-6 col-lg-6 col-xl-2" >
+                        <div class="footer-widget footer-widget__contact-widget">
+                            <h3 class="footer-widget__title">Contact</h3><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__contact">
+                                <li>
+                                    <i class="fa fa-phone-square"></i>
+                                    <a href="tel:+84 865 350 702">+84 816 521 125</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="mailto:truongnxhe150804@fpt.edu.vn">truongnxhe150804@fpt.edu.vn</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-map-marker-alt"></i>
+                                    <a href="#">13701 NE 171st Street, Woodinville, WA 98072</a>
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__contact -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-widget footer-widget__links-widget">
+                            <h3 class="footer-widget__title">Links</h3><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__links">
+                                <li>
+                                    <a href="index">Top Sellers</a>
+                                </li>
+                                <li>
+                                    <a href="products">Shopping</a>
+                                </li>
+                                <li>
+                                    <a href="about">About Store</a>
+                                </li>
+                                <li>
+                                    <a href="contact">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="contact">Help</a>
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__contact -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-widget">
+                            <h3 class="footer-widget__title">Explore</h3><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__links">
+                                <li>
+                                    <a href="products">New Products</a>
+                                </li>
+                                <li>
+                                    <a href="checkout">My Account</a>
+                                </li>
+                                <li>
+                                    <a href="contact">Support</a>
+                                </li>
+                                <li>
+                                    <a href="contact">FAQs</a>
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__contact -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-widget">
+                            <h3 class="footer-widget__title">Newsletter</h3><!-- /.footer-widget__title -->
+                            <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
+                                <input type="email" name="EMAIL" id="mc-email" placeholder="Email Address">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                            <div class="mc-form__response"></div><!-- /.mc-form__response -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+            <div class="bottom-footer">
+                <div class="container">
+                    <hr>
+                    <div class="inner-container text-center">
+                        <div class="bottom-footer__social">
+                            <c:forEach var="x" items="${da.socialNetwork}">
+                                <a href="${x.link}" class="fab ${x.name}"></a>                                   
+                            </c:forEach>
+                        </div><!-- /.bottom-footer__social -->
+                        <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Nguyễn Xuân Trường</p>
+                    </div><!-- /.inner-container -->
+                </div><!-- /.container -->
+            </div><!-- /.bottom-footer -->
+        </footer><!-- /.site-footer -->
 </body>
 
 </html>

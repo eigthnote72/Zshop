@@ -15,9 +15,29 @@
     margin-right: 10%;
 }
 
+.searchBar{
+  padding-left: 7%;
+}
+.account{
+  margin-right: 5%;
+}
+
+
+
 @media screen and (max-width: 991px) {
     section.footer {
       margin-left: 0px;
       margin-right: 0px;
     }
+  }
+
+  @media screen and (max-width: 1199px) {
+    div.searchBar{
+      padding-left: 0%;
+    }
+    
+  }
+
+  .site-footer{
+    background-color: rgb(187, 184, 184);
   }
