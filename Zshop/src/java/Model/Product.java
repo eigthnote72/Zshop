@@ -14,16 +14,18 @@ public class Product {
     private String productName;
     private String productPrice;
     private String storage;
+    private String image;
     private String category_groupID;
 
     public Product() {
     }
 
-    public Product(String productID, String productName, String productPrice, String storage, String category_groupID) {
+    public Product(String productID, String productName, String productPrice, String storage, String image, String category_groupID) {
         this.productID = productID;
         this.productName = productName;
         this.productPrice = productPrice;
         this.storage = storage;
+        this.image = image;
         this.category_groupID = category_groupID;
     }
 
@@ -59,6 +61,14 @@ public class Product {
         this.storage = storage;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getCategory_groupID() {
         return category_groupID;
     }
@@ -66,6 +76,8 @@ public class Product {
     public void setCategory_groupID(String category_groupID) {
         this.category_groupID = category_groupID;
     }
+
+    
     
     
 }

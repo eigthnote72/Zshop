@@ -29,7 +29,6 @@ public abstract class BaseDAO<T> {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    public abstract ArrayList<T> getAll();
     
-}
+    
+}}

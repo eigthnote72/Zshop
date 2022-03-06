@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.ImgProducts;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +35,8 @@ public class getProducts extends HttpServlet {
             throws ServletException, IOException {
         GetDataDAO s = new GetDataDAO();
         ArrayList<Product> listProducts = s.getAllProduct();
+        ArrayList<ImgProducts> listImg = s.getImage();
+        request.setAttribute("listImg", listImg);
         request.setAttribute("listProducts", listProducts);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
