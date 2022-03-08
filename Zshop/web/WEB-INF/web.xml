@@ -4,9 +4,25 @@
         <servlet-name>getProducts</servlet-name>
         <servlet-class>Controller.getProducts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>productManagement</servlet-name>
+        <servlet-class>Controller.productManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addProduct</servlet-name>
+        <servlet-class>Controller.addProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/getProducts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productManagement</servlet-name>
+        <url-pattern>/productManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addProduct</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
