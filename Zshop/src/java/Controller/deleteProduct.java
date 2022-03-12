@@ -6,12 +6,8 @@
 package Controller;
 
 import DAL.GetDataDAO;
-import Model.Category;
-import Model.ImgProducts;
-import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eighth_Note
  */
-public class home extends HttpServlet {
+public class deleteProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,12 +30,13 @@ public class home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO s = new GetDataDAO();
-        ArrayList<Product> listProducts = s.getAllProduct();
-        ArrayList<Category> listC = s.getBrand();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listProducts", listProducts);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("pid");
+        
+        GetDataDAO db = new GetDataDAO();
+        db.deleteProduct(id);
+        response.sendRedirect("productManagement");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

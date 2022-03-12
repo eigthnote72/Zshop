@@ -7,7 +7,6 @@ package Controller;
 
 import DAL.GetDataDAO;
 import Model.Category;
-import Model.ImgProducts;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eighth_Note
  */
-public class home extends HttpServlet {
+public class brand extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,12 +33,21 @@ public class home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO s = new GetDataDAO();
-        ArrayList<Product> listProducts = s.getAllProduct();
-        ArrayList<Category> listC = s.getBrand();
+        response.setContentType("text/html;charset=UTF-8");
+        String CID = request.getParameter("cid");
+        ArrayList<Product> listP = new ArrayList<>();
+          
+        GetDataDAO db = new GetDataDAO();
+       
+        listP = db.getProductbyCategory(CID);
+        ArrayList<Category> listC = db.getBrand();
+        
         request.setAttribute("listC", listC);
-        request.setAttribute("listProducts", listProducts);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.setAttribute("listP", listP);
+        request.getRequestDispatcher("../brand.jsp").forward(request, response);
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

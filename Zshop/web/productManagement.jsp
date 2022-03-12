@@ -86,6 +86,7 @@
             document.getElementById('oldID').innerHTML ="";
         }
     </script>
+    
     <% ArrayList<Product> listP = (ArrayList<Product>) request.getAttribute("listProducts"); %>
     <body>
         <div class="container">
@@ -133,8 +134,8 @@
                             </td>
                             <td><%=listP.get(i).getProductPrice()%>₫</td>
                             <td>
-                                <a href="loadProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="delete?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="updateProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Are you sure you want to Delete?');"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                         <%}%>
@@ -172,7 +173,7 @@
                             </div>
                             <div class="form-group">
                                 <label style="display: block">Storage</label>
-                                <input name="storage" type="text" class="form-control" style="width: 90%;display: inline" required> <select name="unit" class="form-select" style="display: inline; height: 30px"><option value="GB" selected>GB</option> <option value="MB">MB</option><option value="T">T</option> </select>
+                                <input name="storage" type="text" class="form-control" style="width: 90%;display: inline" placeholder="Please enter the Storage carefully (Storage cannot be edited)" required> <select name="unit" class="form-select" style="display: inline; height: 30px"><option value="GB" selected>GB</option> <option value="MB">MB</option><option value="T">T</option> </select>
                             </div>
                             <div class="form-group">
                                 <label>Image</label>

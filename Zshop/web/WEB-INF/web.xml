@@ -12,6 +12,18 @@
         <servlet-name>addProduct</servlet-name>
         <servlet-class>Controller.insertProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateProduct</servlet-name>
+        <servlet-class>Controller.updateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteProduct</servlet-name>
+        <servlet-class>Controller.deleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>brand</servlet-name>
+        <servlet-class>Controller.brand</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProduct</servlet-name>
+        <url-pattern>/updateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteProduct</servlet-name>
+        <url-pattern>/deleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>brand</servlet-name>
+        <url-pattern>/home/brand</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
