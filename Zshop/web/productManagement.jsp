@@ -142,14 +142,14 @@
                 </table>
 
             </div>
-            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>
+            <a href="home"><button type="button" class="btn btn-primary">Back to home</button>
 
         </div>
         <!-- Edit Modal HTML -->
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="addProduct" method="post">
+                    <form action="insertProduct" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Product</h4>
 

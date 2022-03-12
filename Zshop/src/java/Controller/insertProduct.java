@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eighth_Note
  */
-public class addProduct extends HttpServlet {
+public class insertProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -88,7 +88,7 @@ public class addProduct extends HttpServlet {
         processRequest(request, response);
         
         GetDataDAO db = new GetDataDAO();
-        ArrayList<Category_Group> listCG = new ArrayList<>();
+        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
         
         String id = request.getParameter("id");
         String name = request.getParameter("name");
@@ -98,7 +98,7 @@ public class addProduct extends HttpServlet {
         String image = request.getParameter("image");
         String Cid = request.getParameter("category");
          
-        String CGID =id.substring(0, id.length()- storage.length());
+        String CGID = id.replace(storage, "");
        
         
         
@@ -111,12 +111,12 @@ public class addProduct extends HttpServlet {
             }
         }
         
-        if(check){
+        if(!check){
             Category_Group cg = new Category_Group();
             cg.setCGID(CGID);
             cg.setCGName(name);
             cg.setCID(Cid);
-            db.createCategory_Group(cg);
+            db.insertCategory_Group(cg);
         }
         
         Product p = new Product();
@@ -127,8 +127,8 @@ public class addProduct extends HttpServlet {
         String storageP = storage + unit;
         p.setStorage(storageP);
         p.setImage(image);
-//        p.setCategory_groupID("SSS20P");
-        db.createProduct(p);
+        p.setCategory_groupID(CGID);
+        db.insertProduct(p);
         
         response.sendRedirect("/Zshop/productManagement");
         

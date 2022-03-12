@@ -114,14 +114,14 @@ public class GetDataDAO extends BaseDAO {
     public ArrayList<Category_Group> getAllCategory_Group (){
         ArrayList<Category_Group> listCG = new ArrayList<>();
         try {
-            String sql = "SELECT  [CGID],[CGName],[CID]FROM [Zshop].[dbo].[Category_Group]";
+            String sql = "SELECT  [CGID],[CGName],[CID] FROM [Zshop].[dbo].[Category_Group]";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Category_Group cg = new Category_Group();
                 cg.setCGID(rs.getString("CGID"));
                 cg.setCGName(rs.getString("CGName"));
-                cg.setCID(sql);
+                cg.setCID(rs.getString("CID"));
                 listCG.add(cg);
             }
         } catch (SQLException ex) {
@@ -131,9 +131,9 @@ public class GetDataDAO extends BaseDAO {
         
     }
     
-    public void createProduct(Product a){
+    public void insertProduct(Product a){
          try {
-            String sql = "INSERT INTO [Products] ([ProductID],[ProductName], [ProductPrice], [Storage],[Image] , [CGID]) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO Products (ProductID,ProductName, ProductPrice, Storage,Image , CGID) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getProductID());
             statement.setString(2, a.getProductName());
@@ -149,7 +149,7 @@ public class GetDataDAO extends BaseDAO {
          
     }
     
-    public  void createCategory_Group(Category_Group cg){
+    public  void insertCategory_Group(Category_Group cg){
         try {
             String sql = " INSERT INTO [Category_Group] ([CGID], [CGName], [CID]) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -157,7 +157,23 @@ public class GetDataDAO extends BaseDAO {
             statement.setString(2, cg.getCGName());
             statement.setString(3, cg.getCID());
             statement.executeUpdate();
-          
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateProduct(Product p){
+        try {
+            String sql = " UPDATE [Products]\n" +
+                           "SET [ProductID] = ?, [ProductName] = ? , [ProductPrice] = ?, [Storage] = ? , [Image] = ? , [CGID] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, p.getProductID());
+            statement.setString(2, p.getProductName());
+            statement.setString(4, p.getStorage());
+            statement.setString(3, p.getProductPrice());
+            statement.setString(5, p.getImage());
+            statement.setString(6, p.getCategory_groupID());
+            statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

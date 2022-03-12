@@ -51,27 +51,30 @@ and open the template in the editor.
                         </div>
 
                         <!-- Giỏ hành và account -->
-                        <div class="account navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()">
+                        <div class="account navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" >
                             <i class="bi bi-bag-plus" style="margin-right: 7%;  color: white; font-size: 27px; "   ></i>
-                            <i class="bi bi-person-circle" style="color: white; font-size: 27px; "></i>
+                            <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
+
 
                         </div>
 
-                    </div>
+
+
+
+
 
 
                 </nav>
 
-
-             <div  id="loginBar"
-                 style="   float: right;  height: 80px; width: 200px; border: 1px solid black; border-radius: 20px;   text-align: center; margin-right: 6%;">
-                <div style="margin-top: 13px;"></div>
-                <span">Please login or register</span>
-                <a href="/Zshop/productManagement" style="margin-right: 10px;">Login</a> <a href="" style="margin-left: 10px;">register</a>
+                <div class="modal fade" id="myModal" role="dialog"
+                     style="   float: right;  height: 80px; width: 200px; border: 1px solid black; border-radius: 20px;   text-align: center; margin-right: 6%; ">
+                    <div style="margin-top: 13px;"></div>
+                    <span>Please login or register</span>
+                    <a href="/Zshop/productManagement" style="margin-right: 10px;">Login</a> <a href="" style="margin-left: 10px;">register</a>
+                </div>
             </div>
-            </div>
 
-            
+
 
 
         </div>
@@ -82,7 +85,7 @@ and open the template in the editor.
                 <%for (int i = 0; i < listProducts.size(); i++) {%>
 
                 <a href="#" style="text-decoration: none;">      
-                    <div onmouseover="zoom(<%=i%>)" onmouseout="back(<%=i%>)" style="height: 347px; margin-right: 10px;">
+                    <div onmouseover="zoom(<%=i%>)" onmouseout="backZoom(<%=i%>)" style="height: 347px; margin-right: 10px;">
                         <img src="<%=listProducts.get(i).getImage()%>" id="img<%=i%>" height="200" width="200" style="display: block;margin-left: auto;margin-right: auto; margin-top: 20px;">
                         <p style="margin-top: 20px; margin-left: 20px; font-weight: 500; margin-right: 20px;"><%=listProducts.get(i).getProductName()%></p>
                         <p style="margin-left: 20px; color: red; font-weight: 500;"><%=listProducts.get(i).getProductPrice()%>₫</p>

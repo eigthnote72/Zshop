@@ -1,7 +1,5 @@
 
-
-
-function zoom(a) {
+function zoom(a) {    // zoom item in home.jsp
     var x = document.getElementById("sizelist").value;
     for (let i = 0; i < x; i++) {
         if (a === i) {
@@ -12,10 +10,8 @@ function zoom(a) {
 
     }
 
-
-
 }
-function back(a) {
+function backZoom(a) {    //backzoomitem in home.jsp
     var x = document.getElementById("sizelist").value;
     for (let i = 0; i < x; i++) {
         if (a === i) {
@@ -25,6 +21,14 @@ function back(a) {
     }
 }
 
+
+//function onpenAccount(){
+//    alert("ablc");
+//    document.getElementById("loginBar").style.display = "block";
+//    
+//    
+//    
+//}
 
 
 
