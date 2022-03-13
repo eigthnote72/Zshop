@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.Account;
 import Model.Category;
 import Model.Product;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,12 +35,20 @@ public class productManagement extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO s = new GetDataDAO();
+        HttpSession session = request.getSession();
+        Account listA = (Account)session.getAttribute("account");
+        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
+            response.sendRedirect("home");
+        }else{
+            GetDataDAO s = new GetDataDAO();
         ArrayList<Product> listProducts = s.getAllProduct();
         ArrayList<Category> listC = s.getBrand();
         request.setAttribute("listC", listC);
         request.setAttribute("listProducts", listProducts);
         request.getRequestDispatcher("productManagement.jsp").forward(request, response);
+        }
+        
+        
         
         
     }

@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.Account;
 import Model.Category;
 import Model.ImgProducts;
 import Model.Product;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,9 +36,14 @@ public class home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO s = new GetDataDAO();
-        ArrayList<Product> listProducts = s.getAllProduct();
-        ArrayList<Category> listC = s.getBrand();
+        GetDataDAO db = new GetDataDAO();
+        ArrayList<Product> listProducts = db.getAllProduct();
+        ArrayList<Category> listC = db.getBrand();
+        HttpSession session = request.getSession();
+        Account account = (Account)session.getAttribute("account");
+        
+        
+        request.setAttribute("account", account);
         request.setAttribute("listC", listC);
         request.setAttribute("listProducts", listProducts);
         request.getRequestDispatcher("home.jsp").forward(request, response);

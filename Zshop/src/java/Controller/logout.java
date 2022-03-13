@@ -5,8 +5,6 @@
  */
 package Controller;
 
-import DAL.GetDataDAO;
-import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eighth_Note
  */
-public class deleteProduct extends HttpServlet {
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,19 +30,9 @@ public class deleteProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Account listA = (Account)session.getAttribute("account");
-        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
-            response.sendRedirect("home");
-        }else{
-        String id = request.getParameter("pid");
-        
-        GetDataDAO db = new GetDataDAO();
-        db.deleteProduct(id);
-        response.sendRedirect("productManagement");
-        }
+        session.removeAttribute("account");
+        response.sendRedirect("home");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

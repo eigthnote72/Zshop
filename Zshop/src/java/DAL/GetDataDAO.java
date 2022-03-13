@@ -5,6 +5,7 @@
  */
 package DAL;
 
+import Model.Account;
 import Model.Category;
 import Model.Category_Group;
 import Model.ImgProducts;
@@ -280,6 +281,75 @@ public class GetDataDAO extends BaseDAO {
         return listP;
     }
     
+    public ArrayList<Account> getListAccount(){
+        ArrayList<Account> listA = new ArrayList<>();
+        try {
+            
+            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name] FROM [Zshop].[dbo].[Account]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setAccountID(rs.getInt("idAcc"));
+                a.setUsername(rs.getString("username"));
+                a.setPassword(rs.getString("password"));
+                a.setPosition(rs.getString("position"));
+                a.setEmail(rs.getString("email"));
+                a.setPhone(rs.getString("phone"));
+                a.setName(rs.getString("name"));
+                listA.add(a);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listA;
+    }
+    
+    public void insertAccount(Account a){
+        try {
+            String sql = " INSERT INTO [Account] ([username], [password],[position],[email],[phone],[name] )\n" +
+                           "VALUES (?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, a.getUsername());
+            statement.setString(2, a.getPassword());
+            statement.setString(3, a.getPosition());
+            statement.setString(4, a.getEmail());
+            statement.setString(5, a.getPhone());
+            statement.setString(6, a.getName());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Account getAccountLogin(String user,String pass){
+        Account a = new Account();
+        try {
+            
+            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name] FROM [Account]\n" +
+                         "  where username = ?\n" +
+                         "  and [password] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user);
+            statement.setString(2, pass);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                a.setAccountID(rs.getInt("idAcc"));
+                a.setUsername(rs.getString("username"));
+                a.setPassword(rs.getString("password"));
+                a.setPosition(rs.getString("position"));
+                a.setEmail(rs.getString("email"));
+                a.setPhone(rs.getString("phone"));
+                a.setName(rs.getString("name"));
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+    }
     
   
     

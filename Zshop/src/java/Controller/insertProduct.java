@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.Account;
 import Model.Category_Group;
 import Model.Product;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,11 +36,7 @@ public class insertProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-                
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,24 +51,30 @@ public class insertProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        PrintWriter out = response.getWriter();
-        String id = request.getParameter("data");
-        GetDataDAO db = new GetDataDAO();
-        
-        ArrayList<Product> listP = db.getProductByID(id);
-        boolean check = false;
-        for(int i = 0 ;i<listP.size();i++){
-           if(listP.get(i).getProductID().equalsIgnoreCase(id)){
-               check = true;
-           }
-        }
-        if(id.equals("") || id == null){
-            out.println();
-        } else if(check){
-            out.println("<li style=\"color:red\"> ProductID is exist </li>");
-        }else{
-            out.println("<li style=\"color:green\"> ProductID is availability </li>");
+        HttpSession session = request.getSession();
+        Account listA = (Account) session.getAttribute("account");
+        if (session.getAttribute("account") == null || !listA.getPosition().equals("admin")) {
+            response.sendRedirect("home");
+        } else {
+            processRequest(request, response);
+            PrintWriter out = response.getWriter();
+            String id = request.getParameter("data");
+            GetDataDAO db = new GetDataDAO();
+
+            ArrayList<Product> listP = db.getProductByID(id);
+            boolean check = false;
+            for (int i = 0; i < listP.size(); i++) {
+                if (listP.get(i).getProductID().equalsIgnoreCase(id)) {
+                    check = true;
+                }
+            }
+            if (id.equals("") || id == null) {
+                out.println();
+            } else if (check) {
+                out.println("<li style=\"color:red\"> ProductID is exist </li>");
+            } else {
+                out.println("<li style=\"color:green\"> ProductID is availability </li>");
+            }
         }
     }
 
@@ -86,10 +90,10 @@ public class insertProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
         GetDataDAO db = new GetDataDAO();
         ArrayList<Category_Group> listCG = db.getAllCategory_Group();
-        
+
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String price = request.getParameter("price");
@@ -97,31 +101,28 @@ public class insertProduct extends HttpServlet {
         String unit = request.getParameter("unit");
         String image = request.getParameter("image");
         String Cid = request.getParameter("category");
-         
+
         String CGID = id.replace(storage, "");
-       
-        
-        
-        
+
         boolean check = false;
-        
+
         for (int i = 0; i < listCG.size(); i++) {
-            if(listCG.get(i).getCGID().equalsIgnoreCase(CGID)){
+            if (listCG.get(i).getCGID().equalsIgnoreCase(CGID)) {
                 check = true;
             }
         }
-        
-        if(!check){
+
+        if (!check) {
             Category_Group cg = new Category_Group();
             cg.setCGID(CGID);
             cg.setCGName(name);
             cg.setCID(Cid);
             db.insertCategory_Group(cg);
         }
-        
+
         Product p = new Product();
         p.setProductID(id);
-        String nameP = name + " " +storage + unit;
+        String nameP = name + " " + storage + unit;
         p.setProductName(nameP);
         p.setProductPrice(price);
         String storageP = storage + unit;
@@ -129,13 +130,9 @@ public class insertProduct extends HttpServlet {
         p.setImage(image);
         p.setCategory_groupID(CGID);
         db.insertProduct(p);
-        
+
         response.sendRedirect("/Zshop/productManagement");
-        
-        
-        
-        
-        
+
     }
 
     /**

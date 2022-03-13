@@ -23,6 +23,16 @@
 
         <script src="./scrip.js"></script>
         <title>Apple</title>
+        <style type="text/css">
+            .dropdown:hover .dropdown-menu{
+                display: block;
+            }
+            .dropdown-toggle::after {
+                content: none;
+
+            }
+
+        </style>
 
     </head>
     <% ArrayList<Product> listProducts = (ArrayList<Product>) request.getAttribute("listP");%>
@@ -37,23 +47,23 @@
                         <!-- logo của shop -->
                         <div class="navbar-collapse logo col-lg-3 col-sm-2 navbar-nav" >
 
-
                             <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" style="padding-top: 0px; padding-bottom: 0px;">
-                                    <i class="bi bi-layout-text-sidebar-reverse" style="color: white ; font-size: 25px;"></i>
-                                    <a style="font-size: 30px; color:white ;">Zshop</a>
-                                </button>
-                                <ul class="dropdown-menu">
+
+                                <i class="bi bi-layout-text-sidebar-reverse" style="color: white ; font-size: 25px;"></i>
+
+
+                                <ul class="dropdown-menu" >
                                     <c:forEach var="o" items="${listC}">
-                                    <li><a class="dropdown-item" href="brand?cid=${o.getcID()}">${o.getcName()}</a></li>
-                                    </c:forEach>
+                                        <li><a class="dropdown-item" href="..\home\brand?cid=${o.getcID()}">${o.getcName()}</a></li>
+                                        </c:forEach>
                                 </ul>
                             </div>
+                            <a href="..\home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px">Zshop</a>
 
                         </div>
 
                         <!-- tìm kiếm của -->
-                        <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent">
+                        <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
                             <form class="d-flex ">
                                 <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
                                        aria-label="Search" style="width: 400px;">
@@ -65,25 +75,46 @@
                         <!-- Giỏ hành và account -->
                         <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" >
                             <i class="bi bi-bag-plus" style="margin-right: 7%;  color: white; font-size: 27px; "   ></i>
-                            <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
+
+                            <c:if test="${sessionScope.account == null}">
+                                <div class="dropdown" >
+
+                                    <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
+                                    <ul class="dropdown-menu" style="margin-left: -60px;">
+
+                                        <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px"><a class="dropdown-item" href="login.jsp" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Login</a></li>
+                                        <li style="margin-bottom: 10px;margin-top: 10px"><p style="display: inline;font-size: 12px;margin-left: 10px">New customer?</p><a href="registerAccount.jsp" style="font-size: 12px;margin-right: 10px">Start Here</a></li>
+                                    </ul>
+                                </div>
+                            </c:if>
 
 
+                            <c:if test="${sessionScope.account != null}">
+                                <div class="dropdown" >
+
+                                    <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
+                                    <ul class="dropdown-menu" style="margin-left: -70px; ">
+                                        <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px;width: 130px;">
+                                            <p style="text-align: center;margin-bottom: 0px; font-size: 17px;">Hi Nguyen Van A</p></li>
+                                        <p style="text-align: center;font-size: 13px; color: rgba(156, 161, 161, 0.932);">@admin1</p>
+                                        </li>
+
+                                        <li style="margin-bottom: 10px;margin-top: -10px;text-align: center;margin-left: 10px;">
+                                            <c:if test="${account.getPosition() == 'admin'}">
+                                            <a href="..\productManagement" style="font-size: 13px;margin-right: 10px;text-decoration: none;">Product Manager</a></br>
+                                            </c:if>
+                                            <a href="#" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
+                                        </li>
+                                        <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
+                                            <a class="dropdown-item" href="..\logout" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </c:if>
                         </div>
-
-
-
-
-
-
-
                 </nav>
 
-                <div class="modal fade" id="myModal" role="dialog"
-                     style="   float: right;  height: 80px; width: 200px; border: 1px solid black; border-radius: 20px;   text-align: center; margin-right: 6%; ">
-                    <div style="margin-top: 13px;"></div>
-                    <span>Please login or register</span>
-                    <a href="/Zshop/productManagement" style="margin-right: 10px;">Login</a> <a href="" style="margin-left: 10px;">register</a>
-                </div>
+                
             </div>
 
 
@@ -117,14 +148,7 @@
 
             <div class="container">
                 <div class="row" >
-                    <div style="margin-right: -100px;" class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-widget footer-widget__about-widget">
-                            <a href="index.html" class="footer-widget__logo">
-                                <a style="font-size: 30px; color:white ; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Zshop</a>
-                            </a>
-                            <p class="thm-text-dark"></p>
-                        </div><!-- /.footer-widget -->
-                    </div><!-- /.col-sm-12 col-md-6  -->
+                    
                     <div style="margin-right: 50px;"class="col-sm-12 col-md-6 col-lg-6 col-xl-4" >
                         <div class="footer-widget footer-widget__contact-widget">
                             <h3 class="footer-widget__title" style="margin-bottom: 5%;">Contact</h3><!-- //.footer-widget__title -->

@@ -7,17 +7,33 @@ and open the template in the editor.
 <html>
 
 <head>
-    <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="css/manager.css" rel="stylesheet" type="text/css"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+
+    <title>Apple</title>
+        <style>
+            .bg-image-vertical {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+  .h-custom-2 {
+    height: 100%;
+  }
+}
+        </style>
 </head>
 
 
@@ -25,38 +41,66 @@ and open the template in the editor.
 <body>
 
     
-            <label>ID : </label>
-            <span> APIP12 </span>
-           
-       
+    <section class="vh-100">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 text-black">
       
-            <label style="display: block;">Name</label>
-            <input name="name" type="text" class="form-control" required>
+              <div class="px-5 ms-xl-4">
+                <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+                <span class="h1 fw-bold mb-0">Logo</span>
+              </div>
       
+              <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+      
+                <form style="width: 23rem;">
        
-            <label>Price</label>
-            <input name="price" type="text" class="form-control" required>
-   
-            <label style="display: block">Storage</label>
-            <input name="storage" type="text" class="form-control" style="width: 94%;display: inline" required> 
-            <select name="unit" class="form-select" style="width: 5%; display: inline;">
-                <option value="GB" selected>GB</option>
-                <option value="MB">MB</option>
-                <option value="T">T</option> </select>
-  
-    
-            <label style="display: block;">Image</label>
-            <input name="image" type="text" class="form-control" required>
- 
+                  <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register</h3>
+       
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example28" class="form-control form-control-lg"  placeholder="Name" name="pass" />
+                  </div>
 
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form2Example18" class="form-control form-control-lg" placeholder="Username"  name="user" style="display: inline;"/>
+                    
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="pass" style="display: inline;" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example28" class="form-control form-control-lg"  placeholder="Re-enter Password" name="pass" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example28" class="form-control form-control-lg"  placeholder="Email" name="pass" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example28" class="form-control form-control-lg"  placeholder="Phone Number" name="pass" />
+                  </div>
 
-
-            <label>Category</label>
-            <select name="category" class="form-select" aria-label="Default select example" style="height: 20px">
-                <c:forEach items="${listC}" var="o">
-                    <option value="${o.getcID()}" style="font-size: 15px">${o.getcName()}</option>
-                </c:forEach>
-            </select>
+                  
+                  
+                 
+                  
+      
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" type="submit">Create</button>
+                  </div>
+      
+                  
+      
+                </form>
+      
+              </div>
+      
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+            </div>
+          </div>
+        </div>
+      </section>
       
 </body>
 

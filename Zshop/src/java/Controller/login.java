@@ -9,6 +9,7 @@ import DAL.GetDataDAO;
 import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eighth_Note
  */
-public class deleteProduct extends HttpServlet {
+public class login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +34,25 @@ public class deleteProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account listA = (Account)session.getAttribute("account");
-        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
-            response.sendRedirect("home");
-        }else{
-        String id = request.getParameter("pid");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String remember = request.getParameter("checkbox");  // value = remeber
         
         GetDataDAO db = new GetDataDAO();
-        db.deleteProduct(id);
-        response.sendRedirect("productManagement");
+
+        Account account = db.getAccountLogin(user, pass);
+        
+        
+        if(account != null){
+            HttpSession session = request.getSession();
+            session.setAttribute("account", account);
+            response.sendRedirect("home");
+            
+            
+        }else{
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

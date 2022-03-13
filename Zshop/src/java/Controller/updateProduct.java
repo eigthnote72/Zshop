@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.Account;
 import Model.Category;
 import Model.Category_Group;
 import Model.Product;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +37,11 @@ public class updateProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        Account listA = (Account)session.getAttribute("account");
+        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
+            response.sendRedirect("home");
+        }else{
         GetDataDAO db = new GetDataDAO();
         String idInput = request.getParameter("pid");
         ArrayList<Category> listC = db.getBrand();
@@ -65,6 +72,7 @@ public class updateProduct extends HttpServlet {
         request.setAttribute("listC", listC);
         request.setAttribute("pUpdate", pUpdate);
         request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

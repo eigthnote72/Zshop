@@ -9,6 +9,7 @@ import DAL.GetDataDAO;
 import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eighth_Note
  */
-public class deleteProduct extends HttpServlet {
+public class insertAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +34,7 @@ public class deleteProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account listA = (Account)session.getAttribute("account");
-        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
-            response.sendRedirect("home");
-        }else{
-        String id = request.getParameter("pid");
         
-        GetDataDAO db = new GetDataDAO();
-        db.deleteProduct(id);
-        response.sendRedirect("productManagement");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +63,47 @@ public class deleteProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        GetDataDAO db = new GetDataDAO();
+        ArrayList<Account> listA = db.getListAccount();
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String rePass = request.getParameter("rePass");
+        String position = "customer";
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String name = request.getParameter("name");
+        boolean check = false;
+        if(!rePass.equals(pass)){
+            String mess = "re-enter password invalid";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("registerAccount.jsp").forward(request, response);
+        }else{
+            for(int i=0;i<listA.size();i++){
+                if(user.equals(listA.get(i).getUsername())){
+                    check = true;
+                }
+            }
+            
+            if(check){
+            String mess = "Account already exists";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("registerAccount.jsp").forward(request, response);
+            }else{
+                Account a = new Account();
+                a.setUsername(user);
+                a.setPassword(pass);
+                a.setPosition(position);
+                a.setEmail(email);
+                a.setPhone(phone);
+                a.setName(name);
+                db.insertAccount(a);
+                HttpSession session = request.getSession();
+                session.setAttribute("account", a);
+                response.sendRedirect("home");
+
+            }
+        }
+        
     }
 
     /**
