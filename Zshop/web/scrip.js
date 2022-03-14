@@ -3,8 +3,8 @@ function zoom(a) {    // zoom item in home.jsp
     var x = document.getElementById("sizelist").value;
     for (let i = 0; i < x; i++) {
         if (a === i) {
-            document.getElementById('img' + i).width = 250;
-            document.getElementById('img' + i).height = 250;
+            document.getElementById('img' + i).width = 230;
+            document.getElementById('img' + i).height = 230;
         }
 
 

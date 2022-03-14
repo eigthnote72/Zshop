@@ -111,7 +111,7 @@ public class GetDataDAO extends BaseDAO {
         
     }
     
-    public ArrayList<Product> getProductByID (String id){
+    public ArrayList<Product> getListProductByID (String id){
         ArrayList<Product> listPByID = new ArrayList<>();
         try {
             String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
@@ -349,6 +349,29 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
+    }
+    
+    
+    public Product getProductByID(String id){
+        Product p = new Product();
+        try {
+            String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+id+"%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                p.setProductID(rs.getString("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setProductPrice(rs.getString("ProductPrice"));
+                p.setStorage(rs.getString("Storage"));
+                p.setImage(rs.getString("Image"));
+                p.setCategory_groupID(rs.getString("CGID"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
     }
     
   

@@ -5,8 +5,13 @@
  */
 package Controller;
 
+import Model.ItemAddToCart;
+import Model.Order;
+import java.util.ArrayList;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eighth_Note
  */
-public class logout extends HttpServlet {
+public class shoppingCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +35,7 @@ public class logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        response.sendRedirect("home");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +50,20 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Order order = (Order) request.getSession().getAttribute("order");
+        
+        ArrayList<ItemAddToCart> listItem = order.getItem();
+        Long total = null ;
+        for(int i=0;i<listItem.size();i++){
+            total = total + listItem.get(i).getQuantity()*Long.parseLong(listItem.get(i).getP().getProductPrice());
+        }
+        request.setAttribute("total", total);
+        request.setAttribute("listItem", listItem);
+        request.setAttribute("order", order);
+        request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+        
+   
     }
 
     /**

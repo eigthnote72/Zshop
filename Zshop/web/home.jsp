@@ -16,7 +16,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,6 +31,12 @@ and open the template in the editor.
                 content: none;
 
             }
+            @media screen and (max-width: 1199px) {
+                div.searchBar{
+                    padding-left: 0%;
+                }
+
+            }
 
         </style>
     </head>
@@ -40,8 +46,8 @@ and open the template in the editor.
     </script>
     <body>
 
-        <div class="">
-            <div class="header  " style="position: fixed; width: 100% ; ">
+        <div class="" >
+            <div class="header  " style="position: fixed; width: 100% ;z-index:5; ">
                 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(248, 42, 42);">
                     <div class="container  " style="display: flex!important; justify-content: space-between!important ;">
 
@@ -75,12 +81,11 @@ and open the template in the editor.
 
                         <!-- Giỏ hành và account -->
                         <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" >
-                            <i class="bi bi-bag-plus" style="margin-right: 7%;  color: white; font-size: 27px; "   ></i>
+                            <a href="shoppingCart" style="margin-right: 7%;"><i class="bi bi-handbag-fill" style="  color: white; font-size: 27px;" ></i></a>
 
                             <c:if test="${sessionScope.account == null}">
                                 <div class="dropdown" >
-
-                                    <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
+                                    <i class="bi bi-person-circle"  style="color: white; font-size: 27px; "></i>
                                     <ul class="dropdown-menu" style="margin-left: -60px;">
 
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px"><a class="dropdown-item" href="login.jsp" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Login</a></li>
@@ -102,12 +107,12 @@ and open the template in the editor.
 
                                         <li style="margin-bottom: 10px;margin-top: -10px;text-align: center;margin-left: 10px;">
                                             <c:if test="${account.getPosition() == 'admin'}">
-                                            <a href="productManagement" style="font-size: 13px;margin-right: 10px;text-decoration: none;">Product Manager</a></br>
+                                                <a href="productManagement" style="font-size: 13px;margin-right: 10px;text-decoration: none;">Product Manager</a></br>
                                             </c:if>
                                             <a href="#" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
                                         </li>
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
-                                            <a class="dropdown-item" href="logout" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            <a class="dropdown-item" href="login" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -120,94 +125,76 @@ and open the template in the editor.
 
 
         </div>
-        <img src="" >
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"  >
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+
+                    <img  src="image\home_samsung.jpg" width="100%" height="587px" style="margin-top: 60px">
+                    <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute;">
+                        <div style="font-size: 35px;margin-bottom: 16px;">Galaxy Z Fold3</div>
+                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;">Buy Now</a>
+                    </div>
+
+
+                </div>
+                <div class="carousel-item">
+                    <img src="image\home_iphone.jpeg" width="100%" height="587px" style="margin-top: 60px">
+                    <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute">
+                        <div style="font-size: 35px;margin-bottom: 16px;">Iphone 13 Series</div>
+                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;">Buy Now</a>
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
         <section class="main"  style="margin-top: 50px">
             <div class="container" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; ">
 
                 <%for (int i = 0; i < listProducts.size(); i++) {%>
 
-                <a href="#" style="text-decoration: none;">      
-                    <div onmouseover="zoom(<%=i%>)" onmouseout="backZoom(<%=i%>)" style="height: 347px; margin-right: 10px;">
+
+                <div onmouseover="zoom(<%=i%>)" onmouseout="backZoom(<%=i%>)" style="height: 347px; margin-right: 10px;margin-bottom: 30px">
+                    <a href="#" style="text-decoration: none;">
                         <img src="<%=listProducts.get(i).getImage()%>" id="img<%=i%>" height="200" width="200" style="display: block;margin-left: auto;margin-right: auto; margin-top: 20px;">
                         <p style="margin-top: 20px; margin-left: 20px; font-weight: 500; margin-right: 20px;"><%=listProducts.get(i).getProductName()%></p>
-                        <p style="margin-left: 20px; color: red; font-weight: 500;"><%=listProducts.get(i).getProductPrice()%>₫</p>
-                        <input id="sizelist" value="<%=listProducts.size()%>" style="display: none" />
-                    </div> 
-                </a>
+                    </a>
+
+                    <div style="display: flex;">
+                        <p style="margin-left: 20px; color: red; font-weight: 500; display: inline;margin-top: 5px;"><%=listProducts.get(i).getProductPrice()%> ₫</p>
+                        <div style="float: right;">
+                            <a href="shoppingCartControl?idP=<%=listProducts.get(i).getProductID()%>" style="background-color: white;border: white;margin-left: 95%;" onmouseover="document.getElementById('<%=listProducts.get(i).getProductID()%>').style.display = 'block';" onmouseout="document.getElementById('<%=listProducts.get(i).getProductID()%>').style.display = 'none';"><i class="bi bi-cart-plus" style="font-size: 20px;margin-right: 45px;"></i></a> 
+                        </div>
+                    </div>
+                    <div  id="<%=listProducts.get(i).getProductID()%>" 
+                          style="display: none;float: right; margin-top: -13px;margin-right: 14px; font-size: 15px;border: 1px solid rgba(0, 0, 0, 0.219); border-radius: 5px; padding-left: 3px;padding-right: 3px;">
+                        Add To Cart</div>
+
+                    <input id="sizelist" value="<%=listProducts.size()%>" style="display: none" />
+                </div> 
                 <%}%>
             </div>
         </section>
 
-    </body>
 
 
 
-    <body>
-        <footer class="site-footer background-black-2" style="margin-top: 100px">
-
-            <div class="container">
-                <div class="row" >
-                    
-                    <div style="margin-right: 50px;"class="col-sm-12 col-md-6 col-lg-6 col-xl-4" >
-                        <div class="footer-widget footer-widget__contact-widget">
-                            <h3 class="footer-widget__title" style="margin-bottom: 5%;">Contact</h3><!-- //.footer-widget__title -->
-                            <ul class="list-unstyled footer-widget__contact">
-                                <li style="margin-bottom: 2%;">
-                                    <i class="bi bi-telephone-fill"></i>
-                                    <a href="tel:+84 865 350 702" style="text-decoration: none; color: rgb(43, 40, 40);">+84 816 521 125</a>
-                                </li>
-                                <li style="margin-bottom: 2%;">
-                                    <i class="bi bi-envelope-fill" ></i>
-                                    <a href="mailto:truongnxhe150804@fpt.edu.vn" style="text-decoration: none; color: rgb(43, 40, 40);">truongnxhe150804@fpt.edu.vn</a>
-                                </li>
-                                <li style="margin-bottom: 2%;">
-                                    <i class="bi bi-geo-alt-fill" style="text-decoration: none; color: rgb(43, 40, 40);"></i>
-                                    <a >Đại học FPT Hòa Lạc - Thạch Thất - Hà Nội</a>
-                                </li>
-                            </ul><!-- /.list-unstyled footer-widget__contact-->
-                        </div><!-- /.footer-widget -->
-                    </div>
-                    <div class="col-sm-12 col-md-5 col-lg-5 col-xl-4">
-                        <div class="footer-widget">
-                            <h3 class="footer-widget__title" style="margin-bottom: 5%;">Explore</h3><!-- /.footer-widget__title -->
-                            <ul class="list-unstyled footer-widget__links">
-                                <li style="margin-bottom: 2%;">
-                                    <a href="products" style="text-decoration: none; color: rgb(43, 40, 40);">New Products</a>
-                                </li>
-                                <li style="margin-bottom: 2%;">
-                                    <a href="checkout" style="text-decoration: none; color: rgb(43, 40, 40);">My Account</a>
-                                </li>
-                                <li style="margin-bottom: 2%;">
-                                    <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">Support</a>
-                                </li>
-                                <li style="margin-bottom: 2%;">
-                                    <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">FAQs</a>
-                                </li>
-                            </ul><!-- /.list-unstyled footer-widget__contact -->
-                        </div><!-- /.footer-widget -->
-                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                        <div class="footer-widget">
-                            <h3 class="footer-widget__title" style="margin-bottom: 7%;">Newsletter</h3><!-- /.footer-widget__title -->
-                            <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
-                                <input type="email" style="width: 200px; margin-bottom: 10px; font-size: 18px; border-radius: 3px; border: none;" name="EMAIL" id="mc-email" placeholder="Email Address">
-                                <button type="submit" style="background-color: rgb(30, 116, 214); color: white; width: 200px; height: 33px; font-size: 18px; font-weight: bold; border-radius: 5px; border: none;" >Subscribe</button>
-                            </form>
-                            <div class="mc-form__response"></div><!-- /.mc-form__response -->
-                        </div><!-- /.footer-widget -->
-                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-            <div class="bottom-footer">
-                <div class="container">
-                    <hr>
-                    <div class="inner-container text-center">
-
-                        <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Nguyễn Xuân Trường</p>
-                    </div><!-- /.inner-container -->
-                </div><!-- /.container -->
-            </div><!-- /.bottom-footer -->
-        </footer><!-- /.site-footer -->
+        <jsp:include page="footer.jsp" ></jsp:include>
     </body>
 
 

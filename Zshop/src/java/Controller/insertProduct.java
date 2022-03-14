@@ -61,7 +61,7 @@ public class insertProduct extends HttpServlet {
             String id = request.getParameter("data");
             GetDataDAO db = new GetDataDAO();
 
-            ArrayList<Product> listP = db.getProductByID(id);
+            ArrayList<Product> listP = db.getListProductByID(id);
             boolean check = false;
             for (int i = 0; i < listP.size(); i++) {
                 if (listP.get(i).getProductID().equalsIgnoreCase(id)) {
