@@ -5,12 +5,17 @@
  */
 package Controller;
 
+import DAL.GetDataDAO;
+import Model.Account;
+import Model.Category;
 import Model.ItemAddToCart;
 import Model.Order;
+import Model.Product;
 import java.util.ArrayList;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +40,7 @@ public class shoppingCart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,20 +55,45 @@ public class shoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // xử get account và list brand -->> Header
+        GetDataDAO db = new GetDataDAO();
+        ArrayList<Category> listC = db.getBrand();
         HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        // xử get account và list brand  (END)
         Order order = (Order) request.getSession().getAttribute("order");
+        if(order == null){
+            request.setAttribute("account", account);
+            request.setAttribute("listC", listC);
+            request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+        }else{
+            ArrayList<ItemAddToCart> listItem = order.getItem();
+        System.out.println(listItem.size());
         
-        ArrayList<ItemAddToCart> listItem = order.getItem();
-        Long total = null ;
-        for(int i=0;i<listItem.size();i++){
-            total = total + listItem.get(i).getQuantity()*Long.parseLong(listItem.get(i).getP().getProductPrice());
+        BigInteger totalBI = new BigInteger("0");
+
+        for (int i = 0; i < listItem.size(); i++) {
+            BigInteger a = new BigInteger(String.valueOf(listItem.get(i).getQuantity()));
+            BigInteger b = new BigInteger(listItem.get(i).getPrice());
+            totalBI = totalBI.add(a.multiply(b));
+            
+            
+            
+
         }
+        
+        String total = cvString(totalBI.toString());
+
+        request.setAttribute("account", account);
+        request.setAttribute("listC", listC);
         request.setAttribute("total", total);
         request.setAttribute("listItem", listItem);
         request.setAttribute("order", order);
         request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
+        }
         
-   
+
     }
 
     /**
@@ -89,5 +119,34 @@ public class shoppingCart extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public String cvString(String inputPrice) {
+        int count = 0;
+        int count1 = 0;
+        String price = "";
+        String temp = "";
+        String a[] = inputPrice.split("");
+        for (int i = inputPrice.length() - 1; i >= 0; i--) {
+            count++;
+            count1++;
+            temp = temp + a[i];
+            if (count == 3) {
+                count = 0;
+                price = price + temp + ".";
+                temp = "";
+            }
+        }
+        if (!temp.isEmpty()) {
+            price = price + temp;
+        }
+        String result = "";
+        for (int i = price.length() - 1; i >= 0; i--) {
+            result = result + price.charAt(i);
+        }
+        if(count%3==0){
+            result = result.substring(1);
+        }
+        return result;
+    }
 
 }

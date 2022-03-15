@@ -8,6 +8,7 @@ package Controller;
 import DAL.GetDataDAO;
 import Model.Account;
 import Model.Category;
+import Model.Category_Group;
 import Model.ImgProducts;
 import Model.Product;
 import java.io.IOException;
@@ -41,8 +42,9 @@ public class home extends HttpServlet {
         ArrayList<Category> listC = db.getBrand();
         HttpSession session = request.getSession();
         Account account = (Account)session.getAttribute("account");
+        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
         
-        
+        request.setAttribute("listCG", listCG);
         request.setAttribute("account", account);
         request.setAttribute("listC", listC);
         request.setAttribute("listProducts", listProducts);

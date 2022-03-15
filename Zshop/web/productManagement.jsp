@@ -15,7 +15,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+        <title>Product Manager</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -89,44 +90,35 @@
     
     <% ArrayList<Product> listP = (ArrayList<Product>) request.getAttribute("listProducts"); %>
     <body>
-        <div class="container">
+        <div class="">
             <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
+                <div class="table-title" style="position: fixed;width: 100%;top: 0px">
+                    <div class="row" style="background-color: #0062cc">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Product</b></h2>
+                            <h2 style="color: white;margin-left: 40px"><b style="color: white"> Quản lý sản phẩm</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-                            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                            <a href="home"  class="btn btn-success" style="float: right;background-color: red;margin-top: 15px;margin-right: 30px"><i class="bi bi-arrow-90deg-right" ></i> <span>Trở về trang chính</span></a>
+                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal" style="float: right;margin-top: 15px;margin-right: 10px"><i class="bi bi-plus-lg" ></i> <span>Thêm Sản Phẩm</span></a>
+		            	
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                            <th>Actions</th>
+                <table class="table table-striped table-hover" style="margin-top: 110px" >
+                    <thead >
+                        <tr style="position: fixed;width: 100%;top: 63px;background-color: grey">
+
+                            <th style="width: 267px">Mã Sản Phẩm</th>
+                            <th style="width: 619px">Tên Sản Phẩm</th>
+                            <th style="width: 582px">Ảnh</th>
+                            <th style="width: 252px">Giá</th>
+                            <th style="width: 182px"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <%for (int i = listP.size()-1; i >0;  i--) {%>
                         <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td>
+
                             <td><%=listP.get(i).getProductID()%></td>
                             <td><%=listP.get(i).getProductName()%></td>
                             <td>
@@ -134,8 +126,8 @@
                             </td>
                             <td><%=listP.get(i).getProductPrice()%>₫</td>
                             <td>
-                                <a href="updateProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Are you sure you want to Delete?');"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="updateProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+                                <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Are you sure you want to Delete?');"><i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i></a>
                             </td>
                         </tr>
                         <%}%>

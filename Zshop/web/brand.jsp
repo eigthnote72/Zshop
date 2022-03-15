@@ -66,14 +66,14 @@
                         <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
                             <form class="d-flex ">
                                 <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
-                                       aria-label="Search" style="width: 400px;">
+                                       aria-label="Search" style="width: 350px;">
                                 <button class="btn " type="submit"
                                         style="background-color: rgb(92, 91, 91); color: white;">Search</button>
                             </form>
                         </div>
 
                         <!-- Giỏ hành và account -->
-                        <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" >
+                        <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" style="margin-right: -120px">
                             <a href="shoppingCart" style="margin-right: 7%;"><i class="bi bi-handbag-fill" style="  color: white; font-size: 27px;" ></i></a>
 
                             <c:if test="${sessionScope.account == null}">

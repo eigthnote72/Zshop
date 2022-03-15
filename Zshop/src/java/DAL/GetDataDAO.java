@@ -36,26 +36,9 @@ public class GetDataDAO extends BaseDAO {
                 p.setProductName(rs.getString("ProductName"));
 
                 String getPrice = rs.getString("ProductPrice");
-                int count = 0;
-                String price = "";
-                String temp = "";
-                String a[] = getPrice.split("");
-                for (int i = getPrice.length() - 1; i >= 0; i--) {
-                    count++;
-                    temp = temp + a[i];
-                    if (count == 3) {
-                        count = 0;
-                        price = price + temp + ".";
-                        temp = "";
-                    }
-                }
-                if (!temp.isEmpty()) {
-                    price = price + temp;
-                }
-                String result = "";
-                for (int i = price.length() - 1; i >= 0; i--) {
-                    result = result + price.charAt(i);
-                }
+                
+                String result = cvString(getPrice);
+                
 
                 p.setProductPrice(result);
                 p.setStorage(rs.getString("Storage"));
@@ -374,7 +357,81 @@ public class GetDataDAO extends BaseDAO {
         return p;
     }
     
-  
+    public Product getProductCVSTringByID(String id){
+        Product p = new Product();
+        try {
+            String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+id+"%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                p.setProductID(rs.getString("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                String getPrice = rs.getString("ProductPrice");
+                String result = cvString(getPrice);
+                p.setProductPrice(result);
+                p.setStorage(rs.getString("Storage"));
+                p.setImage(rs.getString("Image"));
+                p.setCategory_groupID(rs.getString("CGID"));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+    
+    String cvString(String inputPrice) {
+        int count = 0;
+        int count1=0;
+        String price = "";
+        String temp = "";
+        String a[] = inputPrice.split("");
+        for (int i = inputPrice.length() - 1; i >= 0; i--) {
+            count++;
+            count1++;
+            temp = temp + a[i];
+            if (count == 3) {
+                count = 0;
+                price = price + temp + ".";
+                temp = "";
+            }
+        }
+        if (!temp.isEmpty()) {
+            price = price + temp;
+        }
+        String result = "";
+        for (int i = price.length() - 1; i >= 0; i--) {
+            result = result + price.charAt(i);
+        }
+        if(count%3==0){
+            result = result.substring(1);
+        }
+        return result;
+    }
+    
+    public ArrayList<Category_Group> getListCategory_GroupByBrand(String CID){
+        ArrayList<Category_Group> listCG = new ArrayList<>();
+        try {
+            
+            String sql = "SELECT [CGID],[CGName],[CID] FROM [Category_Group] where CID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, CID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Category_Group cg = new Category_Group();
+                cg.setCGID(rs.getString("CGID"));
+                cg.setCGName(rs.getString("CGName"));
+                cg.setCID("CID");
+                listCG.add(cg);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listCG;
+        
+    }
     
     
 

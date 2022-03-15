@@ -1,3 +1,5 @@
+<%@page import="Model.Category_Group"%>
+<%@page import="Model.Category"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Model.ImgProducts"%>
 <%@page import="Model.Product"%>
@@ -21,15 +23,16 @@ and open the template in the editor.
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
 
         <script src="./scrip.js"></script>
         <style type="text/css">
-            .dropdown:hover .dropdown-menu{
+            .dropdown:hover .ac{
                 display: block;
             }
-            .dropdown-toggle::after {
-                content: none;
-
+            .dropend:hover .abc{
+                display: block;
             }
             @media screen and (max-width: 1199px) {
                 div.searchBar{
@@ -38,9 +41,15 @@ and open the template in the editor.
 
             }
 
+
+
+
         </style>
     </head>
     <% ArrayList<Product> listProducts = (ArrayList<Product>) request.getAttribute("listProducts");%>
+    <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
+    <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
+    
     <script>
 
     </script>
@@ -59,10 +68,31 @@ and open the template in the editor.
                                 <i class="bi bi-layout-text-sidebar-reverse" style="color: white ; font-size: 25px;"></i>
 
 
-                                <ul class="dropdown-menu" >
-                                    <c:forEach var="o" items="${listC}">
-                                        <li><a class="dropdown-item" href="home/brand?cid=${o.getcID()}">${o.getcName()}</a></li>
-                                        </c:forEach>
+                                <ul class="dropdown-menu ac" >
+                                    <%int a =10;%>
+                                    <% for(int i = 0 ; i<listC.size();i++){
+                                       
+                                    
+                                    %>
+                                        <li>
+                                            <div class="dropend">
+                                                <a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>"><%=listC.get(i).getcName()%><i class="bi bi-chevron-right" style="float: right;font-size: 13px"></i></a>
+                                                
+                                                <ul class="dropdown-menu abc" style="margin-top: -<%=a%>px;min-height: 175px"> 
+                                                    <%for(int j = 0 ;j<listCG.size();j++){%>
+                                                        <% if(listC.get(i).getcID().equals(listCG.get(j).getCID())) {%>
+                                                        <li><a class="dropdown-item" href="home/brand"><%=listCG.get(j).getCGName()%></a></li>
+                                                        <%}%>
+                                                    <%}
+                                                    a=a+30+1;
+                                                    %>
+                                                </ul>
+
+                                            </div>
+                                        </li>
+
+
+                                    <%}%>
                                 </ul>
                             </div>
                             <a href="home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px">Zshop</a>
@@ -73,14 +103,14 @@ and open the template in the editor.
                         <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
                             <form class="d-flex ">
                                 <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
-                                       aria-label="Search" style="width: 400px;">
+                                       aria-label="Search" style="width: 350px;">
                                 <button class="btn " type="submit"
                                         style="background-color: rgb(92, 91, 91); color: white;">Search</button>
                             </form>
                         </div>
 
                         <!-- Giỏ hành và account -->
-                        <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" >
+                        <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" style="margin-right: -120px">
                             <a href="shoppingCart" style="margin-right: 7%;"><i class="bi bi-handbag-fill" style="  color: white; font-size: 27px;" ></i></a>
 
                             <c:if test="${sessionScope.account == null}">

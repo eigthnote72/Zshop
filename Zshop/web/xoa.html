@@ -2,203 +2,234 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shopping Cart</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Ogani Template">
+  <meta name="keywords" content="Ogani, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shopping Cart</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+  <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<script>
+  function displayOff() {
+    document.getElementById('checkout').style.display = 'none';
+    document.getElementById('input').style.display = 'block';
+  }
+</script>
 
 <body>
 
 
 
-    <!-- Hero Section End -->
+  <!-- Hero Section End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="image\ShoppingCard.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2 style="color: black;">Shopping Cart</h2>
-                        <div class="breadcrumb__option">
-                            
-                            <span style="color: black;">Shopping Cart</span></br>
+  <!-- Breadcrumb Section Begin -->
+  <section class="breadcrumb-section set-bg" data-setbg="image\ShoppingCard.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2 style="color: rgba(77, 70, 70, 0.397);">Shopping Cart</h2>
+            <div class="breadcrumb__option">
 
-                        </div>
-                    </div>
-                </div>
+              <span style="color: black;">Shopping Cart</span></br>
+
             </div>
+          </div>
         </div>
-    </section>
-    <!-- Breadcrumb Section End -->
+      </div>
+    </div>
+  </section>
+  <!-- Breadcrumb Section End -->
 
-    <!-- Shoping Cart Section Begin -->
-    <section class="shoping-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="image\iphone\iphone8plus\iphone8plus.2.jpg" width="150px" height="150px" alt="">
-                                        <h5>Iphone 8 </h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                      <a href="#"> <i class="bi bi-x-lg"></i></a>  
-                                    </td>
-                                </tr>
-                                
-                                
-                            </tbody>
-                        </table>
+  <!-- Shoping Cart Section Begin -->
+  <section class="shoping-cart spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="shoping__product">Products</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="shoping__cart__item">
+                    <img src="image\iphone\iphone8plus\iphone8plus.2.jpg" width="150px" height="150px" alt="">
+                    <h5>Iphone 8 </h5>
+                  </td>
+                  <td class="shoping__cart__price">
+                    $55.00
+                  </td>
+                  <td class="shoping__cart__quantity">
+                    <div class="quantity">
+                      <div class="pro-qty">
+                        <input type="text" value="1">
+                      </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                       
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
-                        <ul>
-                            <li>Total <span>$454.98</span></li>
-                        </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
-                    </div>
-                </div>
-            </div>
+                  </td>
+                  <td class="shoping__cart__total">
+                    $110.00
+                  </td>
+                  <td class="shoping__cart__item__close">
+                    <a href="#"> <i class="bi bi-x-lg"></i></a>
+                  </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
         </div>
-    </section>
-    <!-- Shoping Cart Section End -->
- 
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__btns">
+            <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
-    <footer class="site-footer background-black-2" style="margin-top: 100px">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="shoping__continue">
 
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="shoping__checkout">
+            <h5>Cart Total</h5>
+            <ul>
+              <li>Total <span>$454.98</span></li>
+            </ul>
+            <form action="shoppingCartControl" method="post">
+            <button class="primary-btn" onclick="displayOff()" id="checkout"
+              style=" border: rgba(77, 70, 70, 0.397);width: 100%" type="button; ">
+              PROCEED TO CHECKOUT
+            </button>
+            <div id="input" style="display: none;">
+              <input type="text" name="name" placeholder="Enter Name Customer" class="form-control form-control-lg;"
+                style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;" />
+              <input type="text" name="email" placeholder="Enter Email Customer" class="form-control form-control-lg;"
+                style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;margin-top: 20px;" />
+              <input type="text" name="phone" placeholder="Enter Phone Customer" class="form-control form-control-lg;"
+                style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;margin-top: 20px;" />
+              <button type="submit" class="primary-btn"
+                style="margin-left: 15px;margin-top: 20px;width: 45%; display: inline; ">CHECKOUT</button>
+              <button type="button" class="primary-btn"
+                style="margin-left: 20px; display: inline;margin-top: 20px;width: 45%; background-color: #f0c14b;"><a
+                  href="login.jsp" style="color: white;">Create Account</a></button>
+
+            </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Shoping Cart Section End -->
+
+
+  <footer class="site-footer background-black-2" style="margin-top: 100px">
+
+    <div class="container">
+      <div class="row">
+
+        <div style="margin-right: 50px;" class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+          <div class="footer-widget footer-widget__contact-widget">
+            <h3 class="footer-widget__title" style="margin-bottom: 5%;">Contact</h3><!-- //.footer-widget__title -->
+            <ul class="list-unstyled footer-widget__contact">
+              <li style="margin-bottom: 2%;">
+                <i class="bi bi-telephone-fill"></i>
+                <a href="tel:+84 865 350 702" style="text-decoration: none; color: rgb(43, 40, 40);">+84 816 521 125</a>
+              </li>
+              <li style="margin-bottom: 2%;">
+                <i class="bi bi-envelope-fill"></i>
+                <a href="mailto:truongnxhe150804@fpt.edu.vn"
+                  style="text-decoration: none; color: rgb(43, 40, 40);">truongnxhe150804@fpt.edu.vn</a>
+              </li>
+              <li style="margin-bottom: 2%;">
+                <i class="bi bi-geo-alt-fill" style="text-decoration: none; color: rgb(43, 40, 40);"></i>
+                <a>Đại học FPT Hòa Lạc - Thạch Thất - Hà Nội</a>
+              </li>
+            </ul><!-- /.list-unstyled footer-widget__contact-->
+          </div><!-- /.footer-widget -->
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-4">
+          <div class="footer-widget">
+            <h3 class="footer-widget__title" style="margin-bottom: 5%;">Explore</h3><!-- /.footer-widget__title -->
+            <ul class="list-unstyled footer-widget__links">
+              <li style="margin-bottom: 2%;">
+                <a href="products" style="text-decoration: none; color: rgb(43, 40, 40);">New Products</a>
+              </li>
+              <li style="margin-bottom: 2%;">
+                <a href="checkout" style="text-decoration: none; color: rgb(43, 40, 40);">My Account</a>
+              </li>
+              <li style="margin-bottom: 2%;">
+                <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">Support</a>
+              </li>
+              <li style="margin-bottom: 2%;">
+                <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">FAQs</a>
+              </li>
+            </ul><!-- /.list-unstyled footer-widget__contact -->
+          </div><!-- /.footer-widget -->
+        </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="footer-widget">
+            <h3 class="footer-widget__title" style="margin-bottom: 7%;">Newsletter</h3><!-- /.footer-widget__title -->
+            <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
+              <input type="email"
+                style="width: 200px; margin-bottom: 10px; font-size: 18px; border-radius: 3px; border: none;"
+                name="EMAIL" id="mc-email" placeholder="Email Address">
+              <button type="submit"
+                style="background-color: rgb(30, 116, 214); color: white; width: 200px; height: 33px; font-size: 18px; font-weight: bold; border-radius: 5px; border: none;">Subscribe</button>
+            </form>
+            <div class="mc-form__response"></div><!-- /.mc-form__response -->
+          </div><!-- /.footer-widget -->
+        </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+    <div class="bottom-footer">
       <div class="container">
-          <div class="row" >
+        <hr>
+        <div class="inner-container text-center">
 
-              <div style="margin-right: 50px;"class="col-sm-12 col-md-6 col-lg-6 col-xl-4" >
-                  <div class="footer-widget footer-widget__contact-widget">
-                      <h3 class="footer-widget__title" style="margin-bottom: 5%;">Contact</h3><!-- //.footer-widget__title -->
-                      <ul class="list-unstyled footer-widget__contact">
-                          <li style="margin-bottom: 2%;">
-                              <i class="bi bi-telephone-fill"></i>
-                              <a href="tel:+84 865 350 702" style="text-decoration: none; color: rgb(43, 40, 40);">+84 816 521 125</a>
-                          </li>
-                          <li style="margin-bottom: 2%;">
-                              <i class="bi bi-envelope-fill" ></i>
-                              <a href="mailto:truongnxhe150804@fpt.edu.vn" style="text-decoration: none; color: rgb(43, 40, 40);">truongnxhe150804@fpt.edu.vn</a>
-                          </li>
-                          <li style="margin-bottom: 2%;">
-                              <i class="bi bi-geo-alt-fill" style="text-decoration: none; color: rgb(43, 40, 40);"></i>
-                              <a >Đại học FPT Hòa Lạc - Thạch Thất - Hà Nội</a>
-                          </li>
-                      </ul><!-- /.list-unstyled footer-widget__contact-->
-                  </div><!-- /.footer-widget -->
-              </div>
-              <div class="col-sm-12 col-md-5 col-lg-5 col-xl-4">
-                  <div class="footer-widget">
-                      <h3 class="footer-widget__title" style="margin-bottom: 5%;">Explore</h3><!-- /.footer-widget__title -->
-                      <ul class="list-unstyled footer-widget__links">
-                          <li style="margin-bottom: 2%;">
-                              <a href="products" style="text-decoration: none; color: rgb(43, 40, 40);">New Products</a>
-                          </li>
-                          <li style="margin-bottom: 2%;">
-                              <a href="checkout" style="text-decoration: none; color: rgb(43, 40, 40);">My Account</a>
-                          </li>
-                          <li style="margin-bottom: 2%;">
-                              <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">Support</a>
-                          </li>
-                          <li style="margin-bottom: 2%;">
-                              <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">FAQs</a>
-                          </li>
-                      </ul><!-- /.list-unstyled footer-widget__contact -->
-                  </div><!-- /.footer-widget -->
-              </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
-              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                  <div class="footer-widget">
-                      <h3 class="footer-widget__title" style="margin-bottom: 7%;">Newsletter</h3><!-- /.footer-widget__title -->
-                      <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
-                          <input type="email" style="width: 200px; margin-bottom: 10px; font-size: 18px; border-radius: 3px; border: none;" name="EMAIL" id="mc-email" placeholder="Email Address">
-                          <button type="submit" style="background-color: rgb(30, 116, 214); color: white; width: 200px; height: 33px; font-size: 18px; font-weight: bold; border-radius: 5px; border: none;" >Subscribe</button>
-                      </form>
-                      <div class="mc-form__response"></div><!-- /.mc-form__response -->
-                  </div><!-- /.footer-widget -->
-              </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
-          </div><!-- /.row -->
+          <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Nguyễn Xuân Trường</p>
+        </div><!-- /.inner-container -->
       </div><!-- /.container -->
-      <div class="bottom-footer">
-          <div class="container">
-              <hr>
-              <div class="inner-container text-center">
-
-                  <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Nguyễn Xuân Trường</p>
-              </div><!-- /.inner-container -->
-          </div><!-- /.container -->
-      </div><!-- /.bottom-footer -->
+    </div><!-- /.bottom-footer -->
   </footer><!-- /.site-footer -->
-    
-    <!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+  <!-- Footer Section End -->
+
+  <!-- Js Plugins -->
+  <script src="js/jquery-3.3.1.min.js"></scrip >
+      <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.slicknav.js"></script>
+  <script src="js/mixitup.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/main.js"></script>
 
 
 </body>

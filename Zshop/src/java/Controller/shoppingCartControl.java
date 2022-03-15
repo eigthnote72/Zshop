@@ -6,6 +6,7 @@
 package Controller;
 
 import DAL.GetDataDAO;
+import Model.Account;
 import Model.ItemAddToCart;
 import Model.Order;
 import Model.Product;
@@ -58,6 +59,7 @@ public class shoppingCartControl extends HttpServlet {
 
         if (id != null) {
             Product p = db.getProductByID(id);
+            Product pConvertString = db.getProductCVSTringByID(id);
             if (p != null) {
                 if (request.getParameter("quantity") != null) {
                     quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -68,34 +70,38 @@ public class shoppingCartControl extends HttpServlet {
                     ArrayList<ItemAddToCart> listItem = new ArrayList<>();
                     ItemAddToCart item = new ItemAddToCart();
                     item.setQuantity(quantity);
+                    String price = p.getProductPrice();
+                    p.setProductPrice(pConvertString.getProductPrice());
                     item.setP(p);
-                    item.setPrice(p.getProductPrice());
+                    item.setPrice(price);
+                    listItem.add(item);
                     order.setItem(listItem);
                     session.setAttribute("order", order);
                 } else {
                     Order order = (Order) session.getAttribute("order");
                     ArrayList<ItemAddToCart> listItem = order.getItem();
-                    boolean check = true;
+                    boolean check = false;
                     for (ItemAddToCart item : listItem) {
                         if (item.getP().getProductID().equals(p.getProductID())) {
                             item.setQuantity(item.getQuantity() + quantity);
                             check = true;
                         }
                     }
-                    if (check = false) {
+                    if (check == false) {
                         ItemAddToCart item = new ItemAddToCart();
                         item.setQuantity(quantity);
+                        String price = p.getProductPrice();
+                        p.setProductPrice(pConvertString.getProductPrice());
                         item.setP(p);
-                        item.setPrice(p.getProductPrice());
+                        item.setPrice(price);
                         listItem.add(item);
                     }
                     session.setAttribute("order", order);
                 }
             }
-            response.sendRedirect("home");
-        }else{
-            response.sendRedirect("home");
+
         }
+        response.sendRedirect("home");
     }
 
     /**
@@ -109,7 +115,37 @@ public class shoppingCartControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        Order order = (Order) session.getAttribute("order");
+        String mess ="";
+        if (order != null) {
+            if (account != null) {
+
+                order.setName(account.getName());
+                order.setCustomerID(account.getAccountID());
+                order.setEmail(account.getEmail());
+                order.setPhone(account.getPhone());
+            } else {
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                order.setName(name);
+                order.setEmail(email);
+                order.setPhone(phone);
+            }
+
+            // viết thêm hàm để lưu data order vào database (thiếu code)
+            session.removeAttribute("order");
+            mess ="done";
+        }else{
+            mess = "failed";
+        }
+//        request.setAttribute("mess", mess);
+        response.sendRedirect("shoppingCart");
+//        request.getRequestDispatcher("shoppingCart").forward(request, response);
+
     }
 
     /**
