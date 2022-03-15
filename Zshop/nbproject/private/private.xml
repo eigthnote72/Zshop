@@ -12,16 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/productManagement.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/shoppingCart.jsp</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/home.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/home.jsp</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/productManagement.jsp</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/brand.jsp</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/shoppingCart.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/shoppingCartControl.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/DAL/GetDataDAO.java</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Model/ItemAddToCart.java</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Model/Order.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/brand.java</file>
         </group>
     </open-files>
 </project-private>

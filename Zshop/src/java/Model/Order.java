@@ -19,28 +19,20 @@ public class Order {
     private String name;
     private String phone;
     private String email;
+    private String address;
 
     public Order() {
     }
 
-    public Order(int id, ArrayList<ItemAddToCart> item, int customerID, String name, String phone, String email) {
+    public Order(int id, ArrayList<ItemAddToCart> item, int customerID, String name, String phone, String email, String address) {
         this.id = id;
         this.item = item;
         this.customerID = customerID;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.address = address;
     }
-
-    public ArrayList<ItemAddToCart> getItem() {
-        return item;
-    }
-
-    public void setItem(ArrayList<ItemAddToCart> item) {
-        this.item = item;
-    }
-
-    
 
     public int getId() {
         return id;
@@ -50,7 +42,13 @@ public class Order {
         this.id = id;
     }
 
-    
+    public ArrayList<ItemAddToCart> getItem() {
+        return item;
+    }
+
+    public void setItem(ArrayList<ItemAddToCart> item) {
+        this.item = item;
+    }
 
     public int getCustomerID() {
         return customerID;
@@ -83,6 +81,15 @@ public class Order {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     
     
     

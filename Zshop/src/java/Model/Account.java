@@ -17,11 +17,12 @@ public class Account {
     private String email;
     private String phone;
     private String name;
+    private String address;
 
     public Account() {
     }
 
-    public Account(int accountID, String username, String password, String position, String email, String phone, String name) {
+    public Account(int accountID, String username, String password, String position, String email, String phone, String name, String address) {
         this.accountID = accountID;
         this.username = username;
         this.password = password;
@@ -29,6 +30,7 @@ public class Account {
         this.email = email;
         this.phone = phone;
         this.name = name;
+        this.address = address;
     }
 
     public int getAccountID() {
@@ -86,7 +88,16 @@ public class Account {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+   
 
     
     

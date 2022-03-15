@@ -75,6 +75,9 @@
                   <div class="form-outline mb-4">
                     <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Phone Number" name="phone" />
                   </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Address" name="address" />
+                  </div>
 
                   
                   

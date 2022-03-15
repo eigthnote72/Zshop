@@ -268,7 +268,7 @@ public class GetDataDAO extends BaseDAO {
         ArrayList<Account> listA = new ArrayList<>();
         try {
             
-            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name] FROM [Zshop].[dbo].[Account]";
+            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name],[address] FROM [Zshop].[dbo].[Account]";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -280,6 +280,7 @@ public class GetDataDAO extends BaseDAO {
                 a.setEmail(rs.getString("email"));
                 a.setPhone(rs.getString("phone"));
                 a.setName(rs.getString("name"));
+                a.setAddress(rs.getString("address"));
                 listA.add(a);
             }
             
@@ -310,7 +311,7 @@ public class GetDataDAO extends BaseDAO {
         Account a = new Account();
         try {
             
-            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name] FROM [Account]\n" +
+            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name],[address] FROM [Account]\n" +
                          "  where username = ?\n" +
                          "  and [password] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -325,6 +326,7 @@ public class GetDataDAO extends BaseDAO {
                 a.setEmail(rs.getString("email"));
                 a.setPhone(rs.getString("phone"));
                 a.setName(rs.getString("name"));
+                a.setAddress(rs.getString("address"));
                 
             }
             
@@ -430,6 +432,40 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCG;
+        
+    }
+    
+    public ArrayList<Product> getProductByCategory_Group(String CID, String CGID){
+        ArrayList<Product> listP = new ArrayList<>();
+        try {
+            
+            String sql = "SELECT p.[ProductID],p.[ProductName],p.[ProductPrice],p.[Storage],p.[Image],p.[CGID]\n" +
+                         "FROM [Products] p inner join Category_Group c\n" +
+                         "on p.CGID = c.CGID\n" +
+                         "where c.CGID like ? and c.CID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,"%"+ CGID +"%");
+            statement.setString(2, CID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getString("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+
+                String getPrice = rs.getString("ProductPrice");
+                String result = cvString(getPrice);
+                p.setProductPrice(result);
+                p.setStorage(rs.getString("Storage"));
+                String img = "..\\"+rs.getString("Image");
+                p.setImage(img);
+                p.setCategory_groupID(rs.getString("CGID"));
+                listP.add(p);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listP;
         
     }
     

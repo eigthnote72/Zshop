@@ -27,25 +27,28 @@
 
     </head>
 
-
+    
 
     <body>
-
-        <form action="updateProduct" method="post">
-            <label>ID : ${pUpdate.getProductID()}</label>
-            <input type="hidden" value="${pUpdate.getProductID()}" name="id"/>
-
-
-
-            <label style="display: block;">Name</label>
-            <input name="name" type="text" class="form-control" value="${pUpdate.getProductName()}" required>
+        <c:if test="${sessionScope.account != null && sessionScope.account.getPosition() eq 'admin'}">
+            <c:if test="${idInput == null}">
+                <c:redirect url="/home"/>
+            </c:if>
+            <form action="updateProduct" method="post">
+                <label>ID : ${pUpdate.getProductID()}</label>
+                <input type="hidden" value="${pUpdate.getProductID()}" name="id"/>
 
 
-            <label>Price</label>
-            <input name="price" type="text" class="form-control" value="${pUpdate.getProductPrice()}" required>
 
-            <label >Storage : ${pUpdate.getStorage()}</label>
-            <input type="hidden" value="${pUpdate.getStorage()}" name="storage"/>
+                <label style="display: block;">Name</label>
+                <input name="name" type="text" class="form-control" value="${pUpdate.getProductName()}" required>
+
+
+                <label>Price</label>
+                <input name="price" type="text" class="form-control" value="${pUpdate.getProductPrice()}" required>
+
+                <label >Storage : ${pUpdate.getStorage()}</label>
+                <input type="hidden" value="${pUpdate.getStorage()}" name="storage"/>
 
 
                 <label style="display: block;">Image</label>
@@ -54,15 +57,24 @@
 
 
 
-            <label>Category</label>
-            <select name="category" class="form-select" aria-label="Default select example" style="height: 20px">
-                <c:forEach items="${listC}" var="o">
-                    <option value="${o.getcID()}" style="font-size: 15px" <c:if test="${categoryID == o.getcID()}">selected</c:if> >${o.getcName()}</option>
-                </c:forEach>
-            </select></br>
-            <a href="productManagement" ><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
-            <input type="submit" class="btn btn-success" value="Upadate">
-        </form>
+                <label>Category</label>
+                <select name="category" class="form-select" aria-label="Default select example" style="height: 20px">
+                    <c:forEach items="${listC}" var="o">
+                        <option value="${o.getcID()}" style="font-size: 15px" <c:if test="${categoryID == o.getcID()}">selected</c:if> >${o.getcName()}</option>
+                    </c:forEach>
+                </select></br>
+                <a href="productManagement" ><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"></a>
+                <input type="submit" class="btn btn-success" value="Upadate">
+            </form>
+        </c:if>
+        <c:if test="${sessionScope.account == null}">
+            <c:redirect url="/home"/>
+
+        </c:if>
+        <c:if test="${sessionScope.account.getPosition() ne 'admin'}">
+            <c:redirect url="/home"/>
+
+        </c:if>
 
     </body>
 

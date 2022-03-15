@@ -40,6 +40,10 @@
         <servlet-name>shoppingCart</servlet-name>
         <servlet-class>Controller.shoppingCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>setProfileAccount</servlet-name>
+        <servlet-class>Controller.setProfileAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>shoppingCart</servlet-name>
         <url-pattern>/shoppingCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setProfileAccount</servlet-name>
+        <url-pattern>/setProfileAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

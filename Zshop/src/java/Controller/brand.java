@@ -7,6 +7,7 @@ package Controller;
 
 import DAL.GetDataDAO;
 import Model.Category;
+import Model.Category_Group;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,14 +35,36 @@ public class brand extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String CID = request.getParameter("cid");
-        ArrayList<Product> listP = new ArrayList<>();
-          
         GetDataDAO db = new GetDataDAO();
-       
-        listP = db.getProductbyCategory(CID);
+        String CID = request.getParameter("cid");
+        String CGID = request.getParameter("cgid");
+        ArrayList<Product> listP = new ArrayList<>();
+        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
+        String CGName = "";
+        String brandName = "";
         ArrayList<Category> listC = db.getBrand();
         
+        for(int i =0;i<listC.size();i++){
+            if(listC.get(i).getcID().equals(CID)){
+                brandName = listC.get(i).getcName();
+            }
+        }
+       
+        
+        
+        if(CGID != null){
+            listP = db.getProductByCategory_Group(CID, CGID);
+            for(int i=0;i<listCG.size();i++){
+                if(listCG.get(i).getCGID().equals(CGID)){
+                    CGName = listCG.get(i).getCGName();
+                }
+            }
+        }else{
+            listP = db.getProductbyCategory(CID);
+        }
+        request.setAttribute("CGName", CGName);
+        request.setAttribute("listCG", listCG);
+        request.setAttribute("brandName", brandName);
         request.setAttribute("listC", listC);
         request.setAttribute("listP", listP);
         request.getRequestDispatcher("../brand.jsp").forward(request, response);

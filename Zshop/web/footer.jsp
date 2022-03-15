@@ -52,16 +52,16 @@
                             <h3 class="footer-widget__title" style="margin-bottom: 5%;">Explore</h3><!-- /.footer-widget__title -->
                             <ul class="list-unstyled footer-widget__links">
                                 <li style="margin-bottom: 2%;">
-                                    <a href="products" style="text-decoration: none; color: rgb(43, 40, 40);">New Products</a>
+                                    <a href="#" style="text-decoration: none; color: rgb(43, 40, 40);">New Products</a>
                                 </li>
                                 <li style="margin-bottom: 2%;">
-                                    <a href="checkout" style="text-decoration: none; color: rgb(43, 40, 40);">My Account</a>
+                                    <a href="#" style="text-decoration: none; color: rgb(43, 40, 40);">My Account</a>
                                 </li>
                                 <li style="margin-bottom: 2%;">
-                                    <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">Support</a>
+                                    <a href="#" style="text-decoration: none; color: rgb(43, 40, 40);">Support</a>
                                 </li>
                                 <li style="margin-bottom: 2%;">
-                                    <a href="contact" style="text-decoration: none; color: rgb(43, 40, 40);">FAQs</a>
+                                    <a href="#" style="text-decoration: none; color: rgb(43, 40, 40);">FAQs</a>
                                 </li>
                             </ul><!-- /.list-unstyled footer-widget__contact -->
                         </div><!-- /.footer-widget -->
@@ -69,9 +69,9 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
                         <div class="footer-widget">
                             <h3 class="footer-widget__title" style="margin-bottom: 7%;">Newsletter</h3><!-- /.footer-widget__title -->
-                            <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
+                            <form action="#">
                                 <input type="email" style="width: 200px; margin-bottom: 10px; font-size: 18px; border-radius: 3px; border: none;" name="EMAIL" id="mc-email" placeholder="Email Address">
-                                <button type="submit" style="background-color: rgb(30, 116, 214); color: white; width: 200px; height: 33px; font-size: 18px; font-weight: bold; border-radius: 5px; border: none;" >Subscribe</button>
+                                <button type="reset" style="background-color: rgb(30, 116, 214); color: white; width: 200px; height: 33px; font-size: 18px; font-weight: bold; border-radius: 5px; border: none;" >Subscribe</button>
                             </form>
                             <div class="mc-form__response"></div><!-- /.mc-form__response -->
                         </div><!-- /.footer-widget -->

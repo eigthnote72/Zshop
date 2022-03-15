@@ -67,6 +67,7 @@ public class updateProduct extends HttpServlet {
 
         String unit = pUpdate.getStorage().replace(pUpdate.getProductID().replace(pUpdate.getCategory_groupID(), ""), "");
 
+        request.setAttribute("idInput",idInput);
         request.setAttribute("categoryID", categoryID);
         request.setAttribute("unit", unit);
         request.setAttribute("listC", listC);

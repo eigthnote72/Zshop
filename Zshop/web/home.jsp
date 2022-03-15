@@ -19,7 +19,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -81,7 +81,7 @@ and open the template in the editor.
                                                 <ul class="dropdown-menu abc" style="margin-top: -<%=a%>px;min-height: 175px"> 
                                                     <%for(int j = 0 ;j<listCG.size();j++){%>
                                                         <% if(listC.get(i).getcID().equals(listCG.get(j).getCID())) {%>
-                                                        <li><a class="dropdown-item" href="home/brand"><%=listCG.get(j).getCGName()%></a></li>
+                                                        <li><a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>&cgid=<%=listCG.get(j).getCGID()%>"><%=listCG.get(j).getCGName()%></a></li>
                                                         <%}%>
                                                     <%}
                                                     a=a+30+1;
@@ -95,7 +95,7 @@ and open the template in the editor.
                                     <%}%>
                                 </ul>
                             </div>
-                            <a href="home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px">Zshop</a>
+                                <a href="home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px" title="Home">Zshop</a>
 
                         </div>
 
@@ -111,12 +111,12 @@ and open the template in the editor.
 
                         <!-- Giỏ hành và account -->
                         <div class="navbar-collapse collapse" onmouseover="displayLG1()" onmouseout="displayLG2()" style="margin-right: -120px">
-                            <a href="shoppingCart" style="margin-right: 7%;"><i class="bi bi-handbag-fill" style="  color: white; font-size: 27px;" ></i></a>
+                            <a href="shoppingCart" style="margin-right: 7%;"><i class="bi bi-handbag-fill" style="  color: white; font-size: 27px;" data-toggle="tooltip" title="Giỏ hàng"></i></a>
 
                             <c:if test="${sessionScope.account == null}">
                                 <div class="dropdown" >
                                     <i class="bi bi-person-circle"  style="color: white; font-size: 27px; "></i>
-                                    <ul class="dropdown-menu" style="margin-left: -60px;">
+                                    <ul class="dropdown-menu ac" style="margin-left: -60px;">
 
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px"><a class="dropdown-item" href="login.jsp" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Login</a></li>
                                         <li style="margin-bottom: 10px;margin-top: 10px"><p style="display: inline;font-size: 12px;margin-left: 10px">New customer?</p><a href="registerAccount.jsp" style="font-size: 12px;margin-right: 10px">Start Here</a></li>
@@ -129,7 +129,7 @@ and open the template in the editor.
                                 <div class="dropdown" >
 
                                     <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
-                                    <ul class="dropdown-menu" style="margin-left: -70px; ">
+                                    <ul class="dropdown-menu ac" style="margin-left: -70px; ">
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px;width: 130px;">
                                             <p style="text-align: center;margin-bottom: 0px; font-size: 17px;">Hi Nguyen Van A</p></li>
                                         <p style="text-align: center;font-size: 13px; color: rgba(156, 161, 161, 0.932);">@admin1</p>
@@ -139,7 +139,7 @@ and open the template in the editor.
                                             <c:if test="${account.getPosition() == 'admin'}">
                                                 <a href="productManagement" style="font-size: 13px;margin-right: 10px;text-decoration: none;">Product Manager</a></br>
                                             </c:if>
-                                            <a href="#" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
+                                            <a href="setProfileAccount" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
                                         </li>
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
                                             <a class="dropdown-item" href="login" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
@@ -168,7 +168,7 @@ and open the template in the editor.
                     <img  src="image\home_samsung.jpg" width="100%" height="587px" style="margin-top: 60px">
                     <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute;">
                         <div style="font-size: 35px;margin-bottom: 16px;">Galaxy Z Fold3</div>
-                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;">Buy Now</a>
+                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
                     </div>
 
 
@@ -177,7 +177,8 @@ and open the template in the editor.
                     <img src="image\home_iphone.jpeg" width="100%" height="587px" style="margin-top: 60px">
                     <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute">
                         <div style="font-size: 35px;margin-bottom: 16px;">Iphone 13 Series</div>
-                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;">Buy Now</a>
+                        <%String a1 = "AP"; String a2 = "APIP13";%>
+                        <a href="home/brand?cid=<%=a1%>&cgid=<%=a2%>" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 180px">Buy Now</a>
                     </div>
                 </div>
 

@@ -122,7 +122,7 @@ public class shoppingCartControl extends HttpServlet {
         String mess ="";
         if (order != null) {
             if (account != null) {
-
+                order.setAddress(account.getAddress());
                 order.setName(account.getName());
                 order.setCustomerID(account.getAccountID());
                 order.setEmail(account.getEmail());
@@ -131,9 +131,11 @@ public class shoppingCartControl extends HttpServlet {
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
                 order.setName(name);
                 order.setEmail(email);
                 order.setPhone(phone);
+                order.setAddress(address);
             }
 
             // viết thêm hàm để lưu data order vào database (thiếu code)

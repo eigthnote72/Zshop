@@ -107,7 +107,42 @@ public class shoppingCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String button = request.getParameter("button");
+        String idP = request.getParameter("idP");
+        HttpSession session = request.getSession();
+        Order order = (Order) request.getSession().getAttribute("order");
+        ArrayList<ItemAddToCart> listItem = order.getItem();
+        if(button.equals("-")){
+            for(int i=0;i<listItem.size();i++){
+                if(listItem.get(i).getP().getProductID().equals(idP)){
+                    if(listItem.get(i).getQuantity()==1){
+                        listItem.remove(i);
+                    }else{
+                        listItem.get(i).setQuantity(listItem.get(i).getQuantity()-1);
+                    }
+                }
+            }
+        }else if(button.equals("+")){
+             for(int i=0;i<listItem.size();i++){
+                if(listItem.get(i).getP().getProductID().equals(idP)){
+                        listItem.get(i).setQuantity(listItem.get(i).getQuantity()+1);
+                }
+            }
+        }else if(button.equals("x")){
+            for(int i=0;i<listItem.size();i++){
+                if(listItem.get(i).getP().getProductID().equals(idP)){
+                        listItem.remove(i);
+                }
+            }
+        }
+        
+        if(listItem.size() == 0){
+            session.removeAttribute("order");
+        }else{
+            session.setAttribute("order", order);
+        }
+        
+        response.sendRedirect("shoppingCart");
     }
 
     /**

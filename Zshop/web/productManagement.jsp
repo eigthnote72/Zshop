@@ -90,6 +90,10 @@
     
     <% ArrayList<Product> listP = (ArrayList<Product>) request.getAttribute("listProducts"); %>
     <body>
+        <c:if test="${sessionScope.account != null && sessionScope.account.getPosition() eq 'admin'}">
+            <%if(listP == null){%> 
+                <c:redirect url="/productManagement"/>
+            <%}%>
         <div class="">
             <div class="table-wrapper">
                 <div class="table-title" style="position: fixed;width: 100%;top: 0px">
@@ -144,37 +148,37 @@
                 <div class="modal-content">
                     <form action="insertProduct" method="post">
                         <div class="modal-header">						
-                            <h4 class="modal-title">Add Product</h4>
+                            <h4 class="modal-title">Thêm Sản Phẩm</h4>
 
                         </div>
                         <div class="modal-body">					
                             <div class="form-group" >
-                                <label>ID</label>
+                                <label>Mã sản phẩm</label>
                                 <input  oninput="getID(this);" onfocusout="exit()" name="id" id="newID" type="text" class="form-control" required >
                                 <div class="autocom-box" id="oldID">
 
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Tên sản phẩm</label>
                                 <input name="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Price</label>
+                                <label>Giá sản phẩm</label>
                                 <input name="price" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label style="display: block">Storage</label>
-                                <input name="storage" type="text" class="form-control" style="width: 90%;display: inline" placeholder="Please enter the Storage carefully (Storage cannot be edited)" required> <select name="unit" class="form-select" style="display: inline; height: 30px"><option value="GB" selected>GB</option> <option value="MB">MB</option><option value="T">T</option> </select>
+                                <label style="display: block">Dung lượng</label>
+                                <input name="storage" type="text" class="form-control" style="width: 90%;display: inline" placeholder="Lưu ý: Dung lượng không thể chỉnh sửa " required> <select name="unit" class="form-select" style="display: inline; height: 30px"><option value="GB" selected>GB</option> <option value="MB">MB</option><option value="T">T</option> </select>
                             </div>
                             <div class="form-group">
-                                <label>Image</label>
+                                <label>Ảnh</label>
                                 <input name="image" type="text" class="form-control" required>
                             </div>
                             
                             
                             <div class="form-group">
-                                <label>Category</label>
+                                <label>Thương Hiệu</label>
                                 <select name="category" class="form-select" aria-label="Default select example" style="height: 20px">
                                     <c:forEach items="${listC}" var="o">
                                         <option value="${o.getcID()}" style="font-size: 15px">${o.getcName()}</option>
@@ -194,6 +198,15 @@
 
 
         <jsp:include page="footer.jsp"></jsp:include>
+        </c:if>
+        <c:if test="${sessionScope.account == null}">
+            <c:redirect url="/home"/>
+        
+        </c:if>
+        <c:if test="${sessionScope.account.getPosition() ne 'admin'}">
+            <c:redirect url="/home"/>
+        
+        </c:if>
     
     </body>
     <script src="js/manager.js" type="text/javascript"></script>

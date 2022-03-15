@@ -172,10 +172,10 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th class="shoping__product">Products</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
+                                        <th class="shoping__product">Tên Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Tổng</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -196,10 +196,15 @@
                                             <td class="shoping__cart__price">
                                                 <%=listItem.get(i).getP().getProductPrice()%>₫
                                             </td>
+                                            <form action="shoppingCart" method="post">
                                             <td class="shoping__cart__quantity">
                                                 <div class="quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="<%=listItem.get(i).getQuantity()%>">
+                                                    <div style="border: 1px solid rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801);margin-left: 25%;margin-right: 25%;padding-bottom: 5px;padding-top: 5px" >
+                                                        
+                                                            <button value="-" name="button" type="submit" style="border: rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801)"><i class="bi bi-dash" ><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
+                                                            <div  style="font-size: 18px;display: inline;margin-left: 7px;margin-right: 7px"><%=listItem.get(i).getQuantity()%></div>
+                                                            <button value="+" name="button" type="submitmit" style="border: rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801)"><i class="bi bi-plus-lg"><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
+                                                        
                                                     </div>
                                                 </div>
                                             </td>
@@ -209,8 +214,9 @@
                                                 <%=totalI.toString()%> ₫
                                             </td>
                                             <td class="shoping__cart__item__close">
-                                                <a href="#"> <i class="bi bi-x-lg"></i></a>  
+                                                <button name="button" type="submit" value="x" style="background-color: white;border: white" ><i class="bi bi-x-lg" style="color: red" title="Xóa sản phẩm"><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
                                             </td>
+                                            </form>
                                         </tr>
                                         <%}%>
                                     </c:if>
@@ -218,7 +224,7 @@
                                 </tbody>
                             </table>
                             <c:if test="${sessionScope.order == null}">
-                                <div style="text-align: center;margin-top: 30px;font-size: 20px">List Empty</div>
+                                <div style="text-align: center;margin-top: 30px;font-size: 20px">Danh sách trống</div>
                             </c:if>
                         </div>
                     </div>
@@ -226,7 +232,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="shoping__cart__btns">
-                            <a href="home" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            <a href="home" class="primary-btn cart-btn">Tiếp tục SHOPPING</a>
 
                         </div>
                     </div>
@@ -235,22 +241,23 @@
 
                         </div>
                     </div>
+                    <c:if test="${sessionScope.order != null}">
                     <div class="col-lg-6">
                         <div class="shoping__checkout">
                             <h5>Cart Total</h5>
                             <ul>
                                 <c:if test="${sessionScope.order != null}">
-                                    <li>Total <span>${total} ₫</span></li>
+                                    <li>Tổng tiền <span>${total} ₫</span></li>
                                     </c:if>
                                     <c:if test="${sessionScope.order == null}">
-                                    <li>Total <span></span></li>
+                                    <li>Tổng tiền <span></span></li>
                                     </c:if>
 
                             </ul>
                             <c:if test="${sessionScope.account != null}">
                                 <form action="shoppingCartControl" method="post">
                                     <button class="primary-btn" style="border: rgba(77, 70, 70, 0.397);width: 100%" type="submit">
-                                        PROCEED TO CHECKOUT
+                                        Thanh Toán
                                     </button>
                                 </form>
                             </c:if>
@@ -258,7 +265,7 @@
                                 <form action="shoppingCartControl" method="post">
                                     <div class="primary-btn" onclick="displayOff()" id="checkout"
                                             style=" border: rgba(77, 70, 70, 0.397);width: 100%;cursor: pointer;" >
-                                        PROCEED TO CHECKOUT
+                                        Tiến hành thanh toán
                                     </div>
                                     <div id="input" style="display: none;">
                                         <input type="text" name="name" placeholder="Enter Name Customer" class="form-control form-control-lg;"
@@ -267,11 +274,13 @@
                                                style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;margin-top: 20px;" />
                                         <input type="text" name="phone" placeholder="Enter Phone Customer" class="form-control form-control-lg;"
                                                style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;margin-top: 20px;" />
+                                        <input type="text" name="address" placeholder="Enter Address Customer" class="form-control form-control-lg;"
+                                               style="width: 100%; border:1px solid rgba(29, 15, 15, 0.342);border-radius: 5px; padding-top: 4px; padding-bottom: 4px;margin-top: 20px;" />
                                         <button type="submit" class="primary-btn"
-                                                style="margin-left: 15px;margin-top: 20px;width: 45%; display: inline; ">CHECKOUT</button>
+                                                style="margin-left: 15px;margin-top: 20px;width: 45%; display: inline; ">Thanh Toán</button>
                                         <button type="button" class="primary-btn"
                                                 style="margin-left: 20px; display: inline;margin-top: 20px;width: 45%; background-color: #f0c14b;"><a
-                                                href="login.jsp" style="color: white;">Create Account</a></button>
+                                                href="login.jsp" style="color: white;">Tạo tài khoản</a></button>
 
                                     </div>
                                 </c:if>
@@ -279,6 +288,7 @@
                             </form>
                         </div>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </section>
