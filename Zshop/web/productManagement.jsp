@@ -131,7 +131,7 @@
                             <td><%=listP.get(i).getProductPrice()%>₫</td>
                             <td>
                                 <a href="updateProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
-                                <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Are you sure you want to Delete?');"><i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i></a>
+                                <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Bạn có muốn xóa sản phẩm không ?');"><i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i></a>
                             </td>
                         </tr>
                         <%}%>

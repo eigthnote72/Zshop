@@ -138,6 +138,8 @@ public class GetDataDAO extends BaseDAO {
         
     }
     
+    
+    
     public void insertProduct(Product a){
          try {
             String sql = "INSERT INTO Products (ProductID,ProductName, ProductPrice, Storage,Image , CGID) VALUES (?,?,?,?,?,?)";
@@ -468,7 +470,26 @@ public class GetDataDAO extends BaseDAO {
         return listP;
         
     }
-    
+     
+    public ArrayList<String> getImageByCGID(String CGID){
+        ArrayList<String> listImg = new ArrayList<>();
+        try {
+            
+            String sql = "  select URLImage from ImageProduct \n" +
+                     "  where CGID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,CGID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                listImg.add(rs.getString("URLImage"));
+            }
+      
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listImg;
+    }
     
 
 //    public ArrayList<ImgProducts> getImage() {

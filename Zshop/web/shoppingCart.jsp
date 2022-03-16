@@ -214,7 +214,7 @@
                                                 <%=totalI.toString()%> ₫
                                             </td>
                                             <td class="shoping__cart__item__close">
-                                                <button name="button" type="submit" value="x" style="background-color: white;border: white" ><i class="bi bi-x-lg" style="color: red" title="Xóa sản phẩm"><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
+                                                <button name="button" type="submit" value="x" onclick="return confirm('Bạn có muốn xóa sản phẩm không ?');" style="background-color: white;border: white" ><i class="bi bi-x-lg" style="color: red" title="Xóa sản phẩm"><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
                                             </td>
                                             </form>
                                         </tr>

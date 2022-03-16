@@ -1,32 +1,24 @@
+<%-- 
+    Document   : productDetail
+    Created on : Mar 16, 2022, 10:44:11 AM
+    Author     : Eighth_Note
+--%>
+
 <%@page import="Model.Category_Group"%>
 <%@page import="Model.Category"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="Model.ImgProducts"%>
-<%@page import="Model.Product"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-
     <head>
-        <title>Home</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-
-        <script src="./scrip.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Product Detail</title>
         <style type="text/css">
             .dropdown:hover .ac{
                 display: block;
@@ -45,16 +37,33 @@ and open the template in the editor.
 
 
         </style>
+
     </head>
-    <% ArrayList<Product> listProducts = (ArrayList<Product>) request.getAttribute("listProducts");%>
+
     <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
     <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
-    
     <script>
+        function change_image(image){
 
+var container = document.getElementById("main-image");
+
+container.src = image.src;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+
+
+
+
+
+
+
+});
     </script>
     <body>
-
+         <!-- header -->
         <div class="" >
             <div class="header  " style="position: fixed; width: 100% ;z-index:5; ">
                 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(248, 42, 42);">
@@ -155,79 +164,49 @@ and open the template in the editor.
 
 
         </div>
+        <!-- Main -->
+        <div style="margin-top: 200px">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="images p-3 text-center ">
+                                    <div class="text-center p-4"> <img id="main-image" src="${listImg.get(1)}" width="250" height="250" /> </div>
+                                    <c:forEach var="o" items="${listImg}" >
+                                    <div class="thumbnail text-center" style="display: inline"> <img onclick="change_image(this)" src="${o}" width="70" height="70"></div> 
+                                    </c:forEach>
+                                
+                            </div>
+                                    </div>
+                            <div class="col-lg-5">
+                                <div class="product p-4">
+                                    <div class="mt-4 mb-3"> 
+                                        <h5 class="text-uppercase">${p.getProductName()}</h5>
+                                        <div class="price d-flex flex-row align-items-center"> 
+                                            <p class="act-price" style="color: red;font-size: 17px">${p.getProductPrice()} ₫</p>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"  >
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-
-                    <img  src="image\home_samsung.jpg" width="100%" height="587px" style="margin-top: 60px">
-                    <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute;">
-                        <div style="font-size: 35px;margin-bottom: 16px;">Galaxy Z Fold3</div>
-                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
+                                        </div>
+                                    </div>
+                                    <div class="sizes mt-5">
+                                        <h9 class="text-uppercase" >Dung lượng</h9> 
+                                        <div>${p.getStorage()}</div>
+                                    </div>
+                                    <div class="sizes mt-5">
+                                        <h6 class="text-uppercase">Số lượng</h6> 
+                                        <input type="number" value="1">
+                                    </div>
+                                    <div class="cart mt-4 align-items-center"> 
+                                        <button class="btn btn-danger text-uppercase mr-2 px-4"> <a  href="shoppingCartControl?idP=${p.getProductID()}" style="color: white; text-decoration: none">Add to cart</a> </button>  
+                                    </div>
+                                </div>
+                            </div>
+                        
                     </div>
-
-
                 </div>
-                <div class="carousel-item">
-                    <img src="image\home_iphone.jpeg" width="100%" height="587px" style="margin-top: 60px">
-                    <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute">
-                        <div style="font-size: 35px;margin-bottom: 16px;">Iphone 13 Series</div>
-                        <%String a1 = "AP"; String a2 = "APIP13";%>
-                        <a href="home/brand?cid=<%=a1%>&cgid=<%=a2%>" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 180px">Buy Now</a>
-                    </div>
-                </div>
-
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-
-
-        <section class="main"  style="margin-top: 50px">
-            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; ">
-
-                <%for (int i = 0; i < listProducts.size(); i++) {%>
-
-
-                <div onmouseover="zoom(<%=i%>)" onmouseout="backZoom(<%=i%>)" style="height: 347px; margin-right: 10px;margin-bottom: 30px">
-                    <a href="productDetail?pid=<%=listProducts.get(i).getProductID()%>" style="text-decoration: none;">
-                        <img src="<%=listProducts.get(i).getImage()%>" id="img<%=i%>" height="200" width="200" style="display: block;margin-left: auto;margin-right: auto; margin-top: 20px;">
-                        <p style="margin-top: 20px; margin-left: 20px; font-weight: 500; margin-right: 20px;"><%=listProducts.get(i).getProductName()%></p>
-                    </a>
-
-                    <div style="display: flex;">
-                        <p style="margin-left: 20px; color: red; font-weight: 500; display: inline;margin-top: 5px;"><%=listProducts.get(i).getProductPrice()%> ₫</p>
-                        <div style="float: right;">
-                            <a href="shoppingCartControl?idP=<%=listProducts.get(i).getProductID()%>" style="background-color: white;border: white;margin-left: 95%;" onmouseover="document.getElementById('<%=listProducts.get(i).getProductID()%>').style.display = 'block';" onmouseout="document.getElementById('<%=listProducts.get(i).getProductID()%>').style.display = 'none';"><i class="bi bi-cart-plus" style="font-size: 20px;margin-right: 45px;"></i></a> 
-                        </div>
-                    </div>
-                    <div  id="<%=listProducts.get(i).getProductID()%>" 
-                          style="display: none;float: right; margin-top: -13px;margin-right: 14px; font-size: 15px;border: 1px solid rgba(0, 0, 0, 0.219); border-radius: 5px; padding-left: 3px;padding-right: 3px;">
-                        Add To Cart</div>
-
-                    <input id="sizelist" value="<%=listProducts.size()%>" style="display: none" />
-                </div> 
-                <%}%>
-            </div>
-        </section>
-
-
-
-
-        <jsp:include page="footer.jsp" ></jsp:include>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
-
-
-
+    
 </html>

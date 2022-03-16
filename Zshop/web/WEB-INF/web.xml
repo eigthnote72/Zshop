@@ -44,6 +44,10 @@
         <servlet-name>setProfileAccount</servlet-name>
         <servlet-class>Controller.setProfileAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>productDetail</servlet-name>
+        <servlet-class>Controller.productDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>setProfileAccount</servlet-name>
         <url-pattern>/setProfileAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productDetail</servlet-name>
+        <url-pattern>/productDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

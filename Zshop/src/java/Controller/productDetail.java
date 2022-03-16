@@ -7,6 +7,9 @@ package Controller;
 
 import DAL.GetDataDAO;
 import Model.Account;
+import Model.Category;
+import Model.Category_Group;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eighth_Note
  */
-public class login extends HttpServlet {
+public class productDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +37,6 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         
     }
 
@@ -50,9 +52,26 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        GetDataDAO db = new GetDataDAO();
+        
+        
+        String pid = request.getParameter("pid");
+        Product p = db.getProductByID(pid);
+        ArrayList<String> listImg =  db.getImageByCGID(p.getCategory_groupID());
+        p.setProductPrice(cvString(p.getProductPrice()));
+        ArrayList<Category> listC = db.getBrand();
         HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        response.sendRedirect("home");
+        Account account = (Account)session.getAttribute("account");
+        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
+        
+        request.setAttribute("listCG", listCG);
+        request.setAttribute("account", account);
+        request.setAttribute("listC", listC);
+        request.setAttribute("listImg", listImg);
+        request.setAttribute("p", p);
+        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+        
+        
     }
 
     /**
@@ -66,30 +85,7 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        String remember = request.getParameter("checkbox");  // value = remeber
-        
-        GetDataDAO db = new GetDataDAO();
-        Account account = new Account();
-        ArrayList<Account> listA = db.getListAccount();
-        boolean check = false;
-        for(int i =0 ; i<listA.size();i++){
-            if(listA.get(i).getUsername().equals(user) && listA.get(i).getPassword().equals(pass)){
-                check = true;
-                account = listA.get(i);
-            }
-        }
-        
-        if(check){
-            HttpSession session = request.getSession();
-            session.setAttribute("account", account);
-            response.sendRedirect("home");
-            
-            
-        }else{
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -102,4 +98,33 @@ public class login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    String cvString(String inputPrice) {
+        int count = 0;
+        int count1=0;
+        String price = "";
+        String temp = "";
+        String a[] = inputPrice.split("");
+        for (int i = inputPrice.length() - 1; i >= 0; i--) {
+            count++;
+            count1++;
+            temp = temp + a[i];
+            if (count == 3) {
+                count = 0;
+                price = price + temp + ".";
+                temp = "";
+            }
+        }
+        if (!temp.isEmpty()) {
+            price = price + temp;
+        }
+        String result = "";
+        for (int i = price.length() - 1; i >= 0; i--) {
+            result = result + price.charAt(i);
+        }
+        if(count%3==0){
+            result = result.substring(1);
+        }
+        return result;
+    }
+    
 }
