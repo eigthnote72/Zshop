@@ -6,7 +6,6 @@
 package Controller;
 
 import DAL.GetDataDAO;
-import Model.Account;
 import Model.Category;
 import Model.Category_Group;
 import Model.Product;
@@ -17,13 +16,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Eighth_Note
  */
-public class productDetail extends HttpServlet {
+public class searchProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,27 +50,22 @@ public class productDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO db = new GetDataDAO();
-        
-        
-        String pid = request.getParameter("pid");
-        Product p = db.getProductByID(pid);
-        ArrayList<String> listImg =  db.getImageByCGID(p.getCategory_groupID());
-        p.setProductPrice(cvString(p.getProductPrice()));
+        GetDataDAO  db = new GetDataDAO();
+        String nameSearch = request.getParameter("name");
+        String CID = request.getParameter("cid");
+        String CGID = request.getParameter("cgid");
         ArrayList<Category> listC = db.getBrand();
-        HttpSession session = request.getSession();
-        Account account = (Account)session.getAttribute("account");
         ArrayList<Category_Group> listCG = db.getAllCategory_Group();
-
-       
+        if(nameSearch.isEmpty() || nameSearch == null){
+            response.sendRedirect("home");
+        }
+        ArrayList<Product> listP = db.getProductSearchByName(nameSearch);
         
+        request.setAttribute("listP", listP);
         request.setAttribute("listCG", listCG);
-        request.setAttribute("account", account);
         request.setAttribute("listC", listC);
-        request.setAttribute("listImg", listImg);
-        request.setAttribute("p", p);
-        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
-        
+        request.setAttribute("nameSearch", nameSearch);
+        request.getRequestDispatcher("../brand.jsp").forward(request, response);
         
     }
 
@@ -100,33 +93,4 @@ public class productDetail extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    String cvString(String inputPrice) {
-        int count = 0;
-        int count1=0;
-        String price = "";
-        String temp = "";
-        String a[] = inputPrice.split("");
-        for (int i = inputPrice.length() - 1; i >= 0; i--) {
-            count++;
-            count1++;
-            temp = temp + a[i];
-            if (count == 3) {
-                count = 0;
-                price = price + temp + ".";
-                temp = "";
-            }
-        }
-        if (!temp.isEmpty()) {
-            price = price + temp;
-        }
-        String result = "";
-        for (int i = price.length() - 1; i >= 0; i--) {
-            result = result + price.charAt(i);
-        }
-        if(count%3==0){
-            result = result.substring(1);
-        }
-        return result;
-    }
-    
 }

@@ -116,8 +116,8 @@
                                     <i class="bi bi-person-circle"  style="color: white; font-size: 27px; " ></i>
                                     <ul class="dropdown-menu" style="margin-left: -70px; ">
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px;width: 130px;">
-                                            <p style="text-align: center;margin-bottom: 0px; font-size: 17px;">Hi Nguyen Van A</p></li>
-                                        <p style="text-align: center;font-size: 13px; color: rgba(156, 161, 161, 0.932);">@admin1</p>
+                                            <p style="text-align: center;margin-bottom: 0px; font-size: 17px;">${account.getName()}</p></li>
+                                        <p style="text-align: center;font-size: 13px; color: rgba(156, 161, 161, 0.932);">@${account.getUsername()}</p>
                                         </li>
 
                                         <li style="margin-bottom: 10px;margin-top: -10px;text-align: center;margin-left: 10px;">

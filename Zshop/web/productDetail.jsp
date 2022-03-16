@@ -43,27 +43,43 @@
     <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
     <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
     <script>
-        function change_image(image){
+        function change_image(image) {
 
-var container = document.getElementById("main-image");
+            var container = document.getElementById("main-image");
 
-container.src = image.src;
-}
-
-
-
-document.addEventListener("DOMContentLoaded", function(event) {
+            container.src = image.src;
+        }
 
 
+
+        document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
 
 
-});
+
+
+        });
+        
+        function up(){
+            var quantity = document.getElementById("quantity").value;
+            document.getElementById("quantity").value = ++quantity;
+        }
+        function down(){
+            
+            var quantity = document.getElementById("quantity").value;
+            if(quantity >1){
+                document.getElementById("quantity").value = --quantity;
+            }else{
+                document.getElementById("quantity").value = quantity;
+            }
+            
+            
+        }
     </script>
     <body>
-         <!-- header -->
+        <!-- header -->
         <div class="" >
             <div class="header  " style="position: fixed; width: 100% ;z-index:5; ">
                 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(248, 42, 42);">
@@ -110,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                         <!-- tìm kiếm của -->
                         <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
-                            <form class="d-flex ">
-                                <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
+                            <form class="d-flex " action="home/searchProduct" method="get">
+                                <input class="form-control me-2" type="search" name="name" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
                                        aria-label="Search" style="width: 350px;">
                                 <button class="btn " type="submit"
                                         style="background-color: rgb(92, 91, 91); color: white;">Search</button>
@@ -165,20 +181,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         </div>
         <!-- Main -->
-        <div style="margin-top: 200px">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-10">
+        <div >
+            <div class="row d-flex justify-content-center" >
+                <div class="col-md-10" style="margin-top: 150px">
                     <div class="card">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="images p-3 text-center ">
                                     <div class="text-center p-4"> <img id="main-image" src="${listImg.get(1)}" width="250" height="250" /> </div>
-                                    <c:forEach var="o" items="${listImg}" >
-                                    <div class="thumbnail text-center" style="display: inline"> <img onclick="change_image(this)" src="${o}" width="70" height="70"></div> 
-                                    </c:forEach>
-                                
+                                        <c:forEach var="o" items="${listImg}" >
+                                        <div class="thumbnail text-center" style="display: inline"> <img onclick="change_image(this)" src="${o}" width="70" height="70"></div> 
+                                        </c:forEach>
+
+                                </div>
                             </div>
-                                    </div>
                             <div class="col-lg-5">
                                 <div class="product p-4">
                                     <div class="mt-4 mb-3"> 
@@ -192,21 +208,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                         <h9 class="text-uppercase" >Dung lượng</h9> 
                                         <div>${p.getStorage()}</div>
                                     </div>
-                                    <div class="sizes mt-5">
-                                        <h6 class="text-uppercase">Số lượng</h6> 
-                                        <input type="number" value="1">
-                                    </div>
-                                    <div class="cart mt-4 align-items-center"> 
-                                        <button class="btn btn-danger text-uppercase mr-2 px-4"> <a  href="shoppingCartControl?idP=${p.getProductID()}" style="color: white; text-decoration: none">Add to cart</a> </button>  
-                                    </div>
+                                    <form action="shoppingCartControl" method="get">
+                                        <div class="sizes mt-5">
+                                            <h6 class="text-uppercase">Số lượng</h6> 
+                                            <div class="quantity">
+                                                <div style="border: 1px solid rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801);padding-bottom: 5px;padding-top: 5px" >
+
+                                                    <i class="bi bi-dash" onclick="down()" style="cursor: pointer"></i>
+                                                    <div  style="font-size: 18px;display: inline;margin-left: 7px;margin-right: 7px;"><input type="number" name="quantity" value="1" id="quantity" readonly style="width: 40px;border: #f3ebeb;border-radius: 5px;text-align: center"/></div>
+                                                    <i class="bi bi-plus-lg" onclick="up()" style="cursor: pointer"></i>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart mt-4 align-items-center"> 
+                                            <button class="btn btn-danger text-uppercase mr-2 px-4"> Add to cart</button>  
+                                            <input type="text" style="display: none" name="idP" value="${p.getProductID()}" />
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <jsp:include page="footer.jsp"></jsp:include>
+            <div style="margin-bottom: 50px"></div>
+            <jsp:include page="footer.jsp"></jsp:include>
     </body>
-    
+
 </html>

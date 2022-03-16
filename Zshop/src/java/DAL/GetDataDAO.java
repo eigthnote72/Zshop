@@ -491,6 +491,36 @@ public class GetDataDAO extends BaseDAO {
         return listImg;
     }
     
+    public ArrayList<Product> getProductSearchByName(String inputName){
+        ArrayList<Product> listP = new ArrayList<>();
+        try {
+            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products \n" +
+                                   "where ProductName like ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,"%"+ inputName+"%");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getString("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                String price = cvString(rs.getString("ProductPrice"));
+                p.setProductPrice(price);
+                p.setStorage(rs.getString("Storage"));
+                String img = "..\\"+rs.getString("Image");
+                p.setImage(img);
+                p.setCategory_groupID(rs.getString("CGID"));
+                listP.add(p);
+            }
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listP;
+    }
+    
 
 //    public ArrayList<ImgProducts> getImage() {
 //        ArrayList<ImgProducts> listImg = new ArrayList<>();

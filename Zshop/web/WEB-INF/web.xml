@@ -48,6 +48,10 @@
         <servlet-name>productDetail</servlet-name>
         <servlet-class>Controller.productDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>searchProduct</servlet-name>
+        <servlet-class>Controller.searchProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>productDetail</servlet-name>
         <url-pattern>/productDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchProduct</servlet-name>
+        <url-pattern>/home/searchProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

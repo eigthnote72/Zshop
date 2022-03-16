@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : apple
     Created on : Mar 13, 2022, 2:35:37 AM
     Author     : Eighth_Note
@@ -51,6 +51,7 @@
     <% String CGName = (String)request.getAttribute("CGName"); %>
     <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
     <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
+    <% String nameSearch = (String)request.getAttribute("nameSearch");%>
     <script>
         function zoom(a) {    // zoom item in home.jsp
     var x = document.getElementById("sizelist").value;
@@ -122,8 +123,8 @@ function backZoom(a) {    //backzoomitem in home.jsp
 
                         <!-- tìm kiếm của -->
                         <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
-                            <form class="d-flex ">
-                                <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
+                            <form class="d-flex " action="..\home\searchProduct" method="get">
+                                <input class="form-control me-2" type="search" name="name"  placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
                                        aria-label="Search" style="width: 350px;">
                                 <button class="btn " type="submit"
                                         style="background-color: rgb(92, 91, 91); color: white;">Search</button>
@@ -183,15 +184,17 @@ function backZoom(a) {    //backzoomitem in home.jsp
         
 
         
-        <section class="main"  >
-            <h3 style="margin-left: 17%;margin-bottom: 30px;padding-top: 80px">${brandName} <%if(!CGName.isEmpty()){%> <i class="bi bi-chevron-right"><%}%></i> <%=CGName%></h3>
+        <section class="main">
+            
+         
+            
             <div class="container" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; ">
 
                 <%for (int i = 0; i < listProducts.size(); i++) {%>
 
 
                 <div onmouseover="zoom(<%=i%>)" onmouseout="backZoom(<%=i%>)" style="height: 347px; margin-right: 10px;margin-bottom: 30px">
-                    <a href="#" style="text-decoration: none;">
+                    <a href="..\productDetail?pid=<%=listProducts.get(i).getProductID()%>" style="text-decoration: none;">
                         <img src="<%=listProducts.get(i).getImage()%>" id="img<%=i%>" height="200" width="200" style="display: block;margin-left: auto;margin-right: auto; margin-top: 20px;">
                         <p style="margin-top: 20px; margin-left: 20px; font-weight: 500; margin-right: 20px;"><%=listProducts.get(i).getProductName()%></p>
                     </a>

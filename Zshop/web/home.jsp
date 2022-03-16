@@ -101,8 +101,8 @@ and open the template in the editor.
 
                         <!-- tìm kiếm của -->
                         <div class="searchBar collapse navbar-collapse col-lg-6 col-sm-8 " id="navbarSupportedContent" style="padding-left: 0px">
-                            <form class="d-flex ">
-                                <input class="form-control me-2" type="search" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
+                            <form class="d-flex " action="home/searchProduct" method="get">
+                                <input class="form-control me-2" type="search" name="name" placeholder="Bạn muốn tìm kiếm sản phẩm gì ?"
                                        aria-label="Search" style="width: 350px;">
                                 <button class="btn " type="submit"
                                         style="background-color: rgb(92, 91, 91); color: white;">Search</button>
@@ -168,7 +168,7 @@ and open the template in the editor.
                     <img  src="image\home_samsung.jpg" width="100%" height="587px" style="margin-top: 60px">
                     <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute;">
                         <div style="font-size: 35px;margin-bottom: 16px;">Galaxy Z Fold3</div>
-                        <a href="#" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
+                        <a href="productDetail?pid=IP1264" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
                     </div>
 
 
