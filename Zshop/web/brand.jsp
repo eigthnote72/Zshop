@@ -186,7 +186,12 @@ function backZoom(a) {    //backzoomitem in home.jsp
         
         <section class="main">
             
-         
+         <%if(nameSearch.isEmpty()){%>
+            <h3 style="margin-left: 17%;margin-bottom: 30px;padding-top: 80px">${brandName} <%if(!CGName.isEmpty()){%> <i class="bi bi-chevron-right"><%}%></i> <%=CGName%></h3>
+            <%}else{%>
+            <h3 style="margin-left: 17%;margin-bottom: 30px;padding-top: 80px"><%=nameSearch%></h3>
+            <%}%>
+
             
             <div class="container" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; ">
 

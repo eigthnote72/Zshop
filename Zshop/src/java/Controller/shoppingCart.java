@@ -8,6 +8,7 @@ package Controller;
 import DAL.GetDataDAO;
 import Model.Account;
 import Model.Category;
+import Model.Category_Group;
 import Model.ItemAddToCart;
 import Model.Order;
 import Model.Product;
@@ -60,12 +61,14 @@ public class shoppingCart extends HttpServlet {
         GetDataDAO db = new GetDataDAO();
         ArrayList<Category> listC = db.getBrand();
         HttpSession session = request.getSession();
+        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
         Account account = (Account) session.getAttribute("account");
         // xử get account và list brand  (END)
         Order order = (Order) request.getSession().getAttribute("order");
         if(order == null){
             request.setAttribute("account", account);
             request.setAttribute("listC", listC);
+            request.setAttribute("listCG", listCG);
             request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
         }else{
             ArrayList<ItemAddToCart> listItem = order.getItem();
@@ -87,6 +90,7 @@ public class shoppingCart extends HttpServlet {
 
         request.setAttribute("account", account);
         request.setAttribute("listC", listC);
+        request.setAttribute("listCG", listCG);
         request.setAttribute("total", total);
         request.setAttribute("listItem", listItem);
         request.setAttribute("order", order);

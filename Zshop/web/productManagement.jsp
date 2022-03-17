@@ -61,7 +61,7 @@
             }
         </style>
     </head>
-    <script>
+<!--    <script>
         function getID(para) {
             var text = para.value;
 //            var id = document.getElementById("newID").value;
@@ -86,7 +86,7 @@
            
             document.getElementById('oldID').innerHTML ="";
         }
-    </script>
+    </script>-->
     
     <% ArrayList<Product> listP = (ArrayList<Product>) request.getAttribute("listProducts"); %>
     <body>

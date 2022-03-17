@@ -36,6 +36,7 @@ public class brand extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         GetDataDAO db = new GetDataDAO();
+        String nameSearch = "";
         String CID = request.getParameter("cid");
         String CGID = request.getParameter("cgid");
         ArrayList<Product> listP = new ArrayList<>();
@@ -53,15 +54,29 @@ public class brand extends HttpServlet {
         
         
         if(CGID != null){
-            listP = db.getProductByCategory_Group(CID, CGID);
+            
+            ArrayList<Product> listTemp = new ArrayList<>();
+            
+            listTemp = db.getProductByCategory_Group(CID, CGID);
             for(int i=0;i<listCG.size();i++){
                 if(listCG.get(i).getCGID().equals(CGID)){
                     CGName = listCG.get(i).getCGName();
                 }
             }
+            
+            for (int i = 0; i < listTemp.size(); i++) {
+                String arr[] = listTemp.get(i).getProductName().split(" ");
+                String temp = getRemoveStorageInProductName(arr.length -1, arr);
+                if(temp.equals(CGName)){
+                    listP.add(listTemp.get(i));
+                }
+            }
+                
+                
         }else{
             listP = db.getProductbyCategory(CID);
         }
+        request.setAttribute("nameSearch", nameSearch);
         request.setAttribute("CGName", CGName);
         request.setAttribute("listCG", listCG);
         request.setAttribute("brandName", brandName);
@@ -71,6 +86,30 @@ public class brand extends HttpServlet {
         
         
         
+    }
+    
+    static String getRemoveStorageInProductName(int index, String[] array) {
+        String[] copy = new String[array.length - 1];
+
+        for (int i = 0, j = 0; i < array.length; i++) {
+            if (i != index) {
+                copy[j++] = array[i] ;
+            }
+        }
+        
+        String x = "";
+        for(int i=0;i<copy.length;i++){
+            
+            if(i == copy.length -1 ){
+                x = x+ copy[i];
+            }else{
+                x = x+ copy[i] +" ";
+            }
+             
+        }
+
+        return  x ;
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

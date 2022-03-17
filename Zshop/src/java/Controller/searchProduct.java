@@ -51,13 +51,14 @@ public class searchProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         GetDataDAO  db = new GetDataDAO();
-        String nameSearch = request.getParameter("name");
+        String nameSearch = "";
+                nameSearch = request.getParameter("name");
         String CID = request.getParameter("cid");
         String CGID = request.getParameter("cgid");
         ArrayList<Category> listC = db.getBrand();
         ArrayList<Category_Group> listCG = db.getAllCategory_Group();
-        if(nameSearch.isEmpty() || nameSearch == null){
-            response.sendRedirect("home");
+        if(nameSearch.isEmpty() || nameSearch == null){  // lỗi
+            request.getRequestDispatcher("home");
         }
         ArrayList<Product> listP = db.getProductSearchByName(nameSearch);
         
