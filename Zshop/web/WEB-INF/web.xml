@@ -82,7 +82,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>insertAccount</servlet-name>
-        <url-pattern>/registerAccount</url-pattern>
+        <url-pattern>/insertAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>shoppingCartControl</servlet-name>

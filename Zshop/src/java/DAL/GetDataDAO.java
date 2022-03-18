@@ -10,6 +10,7 @@ import Model.Category;
 import Model.Category_Group;
 import Model.ImgProducts;
 import Model.Product;
+import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,13 +39,19 @@ public class GetDataDAO extends BaseDAO {
                 String getPrice = rs.getString("ProductPrice");
                 
                 String result = cvString(getPrice);
+//                float temp1 = Float.parseFloat(rs.getString("ProductPrice"));
+//                float temp2 = 8000000;
+                
                 
 
                 p.setProductPrice(result);
                 p.setStorage(rs.getString("Storage"));
                 p.setImage(rs.getString("Image"));
                 p.setCategory_groupID(rs.getString("CGID"));
-                listProduct.add(p);
+                
+                    listProduct.add(p);
+                
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);

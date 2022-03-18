@@ -116,6 +116,7 @@
                             <th style="width: 619px">Tên Sản Phẩm</th>
                             <th style="width: 582px">Ảnh</th>
                             <th style="width: 252px">Giá</th>
+                            <th style="width: 252px">Category</th>
                             <th style="width: 182px"></th>
                         </tr>
                     </thead>
@@ -129,6 +130,7 @@
                                 <img src="<%=listP.get(i).getImage()%>">
                             </td>
                             <td><%=listP.get(i).getProductPrice()%>₫</td>
+                            <td><%=listP.get(i).getCategory_groupID()%></td>
                             <td>
                                 <a href="updateProduct?pid=<%=listP.get(i).getProductID()%>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
                                 <a href="deleteProduct?pid=<%=listP.get(i).getProductID()%>" class="delete" data-toggle="modal" onclick="return confirm('Bạn có muốn xóa sản phẩm không ?');"><i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i></a>

@@ -83,7 +83,7 @@
                     <hr>
                     <div class="inner-container text-center">
 
-                        <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Nguyễn Xuân Trường</p>
+                        <p class="thm-text-dark">© Copyright <span class="dynamic-year"></span> by Phan Tuan Nghia</p>
                     </div><!-- /.inner-container -->
                 </div><!-- /.container -->
             </div><!-- /.bottom-footer -->
