@@ -165,6 +165,22 @@ public class GetDataDAO extends BaseDAO {
          
     }
     
+    public void insertImage(String CGID,String urlImage){
+         try {
+            String sql = "INSERT INTO [ImageProduct] ([CGID],[URLImage]) VALUES (?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, CGID);
+            statement.setString(2, urlImage);
+            
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
     public  void insertCategory_Group(Category_Group cg){
         try {
             String sql = " INSERT INTO [Category_Group] ([CGID], [CGName], [CID]) VALUES (?, ?, ?)";
@@ -277,7 +293,7 @@ public class GetDataDAO extends BaseDAO {
         ArrayList<Account> listA = new ArrayList<>();
         try {
             
-            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name],[address] FROM [Zshop].[dbo].[Account]";
+            String sql = "SELECT [idAcc],[username],[password],[role],[email],[phone],[name],[address] FROM [Zshop].[dbo].[Account]";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -285,7 +301,7 @@ public class GetDataDAO extends BaseDAO {
                 a.setAccountID(rs.getInt("idAcc"));
                 a.setUsername(rs.getString("username"));
                 a.setPassword(rs.getString("password"));
-                a.setPosition(rs.getString("position"));
+                a.setPosition(rs.getString("role"));
                 a.setEmail(rs.getString("email"));
                 a.setPhone(rs.getString("phone"));
                 a.setName(rs.getString("name"));
@@ -301,8 +317,8 @@ public class GetDataDAO extends BaseDAO {
     
     public void insertAccount(Account a){
         try {
-            String sql = " INSERT INTO [Account] ([username], [password],[position],[email],[phone],[name] )\n" +
-                           "VALUES (?,?,?,?,?,?)";
+            String sql = " INSERT INTO [Account] ([username], [password],[role],[email],[phone],[name],[address] )\n" +
+                           "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getUsername());
             statement.setString(2, a.getPassword());
@@ -310,6 +326,7 @@ public class GetDataDAO extends BaseDAO {
             statement.setString(4, a.getEmail());
             statement.setString(5, a.getPhone());
             statement.setString(6, a.getName());
+            statement.setString(7, a.getAddress());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,7 +337,7 @@ public class GetDataDAO extends BaseDAO {
         Account a = new Account();
         try {
             
-            String sql = "SELECT [idAcc],[username],[password],[position],[email],[phone],[name],[address] FROM [Account]\n" +
+            String sql = "SELECT [idAcc],[username],[password],[role],[email],[phone],[name],[address] FROM [Account]\n" +
                          "  where username = ?\n" +
                          "  and [password] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -331,7 +348,7 @@ public class GetDataDAO extends BaseDAO {
                 a.setAccountID(rs.getInt("idAcc"));
                 a.setUsername(rs.getString("username"));
                 a.setPassword(rs.getString("password"));
-                a.setPosition(rs.getString("position"));
+                a.setPosition(rs.getString("role"));
                 a.setEmail(rs.getString("email"));
                 a.setPhone(rs.getString("phone"));
                 a.setName(rs.getString("name"));
