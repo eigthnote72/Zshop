@@ -51,8 +51,32 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        response.sendRedirect("home");
+
+        
+        
+        String urlx ="";
+        if(request.getParameter("urlB") != null){
+            urlx =  request.getParameter("urlB");
+        }
+        if(request.getParameter("cgid") != null){
+            String cgid = request.getParameter("cgid");
+            urlx = urlx + "&cgid=" +cgid;
+        } 
+        if(request.getParameter("url") != null){
+            urlx = request.getParameter("url");
+        }
+        
+        if(request.getParameter("urlS") != null){
+            urlx =request.getParameter("urlS");
+        }
+        
+        if(session.getAttribute("account") != null){
+            session.removeAttribute("account");
+            response.sendRedirect(urlx);
+        }else{
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**
@@ -85,8 +109,6 @@ public class login extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", account);
             response.sendRedirect("home");
-            
-            
         }else{
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

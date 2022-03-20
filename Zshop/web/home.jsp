@@ -142,7 +142,7 @@ and open the template in the editor.
                                             <a href="setProfileAccount" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
                                         </li>
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
-                                            <a class="dropdown-item" href="login" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            <a class="dropdown-item" href="login?url=home" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
                                         </li>
                                     </ul>
                                 </div>

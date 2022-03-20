@@ -140,8 +140,8 @@ function backZoom(a) {    //backzoomitem in home.jsp
                                     <i class="bi bi-person-circle"  style="color: white; font-size: 27px; "></i>
                                     <ul class="dropdown-menu ac" style="margin-left: -60px;">
 
-                                        <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px"><a class="dropdown-item" href="login.jsp" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Login</a></li>
-                                        <li style="margin-bottom: 10px;margin-top: 10px"><p style="display: inline;font-size: 12px;margin-left: 10px">New customer?</p><a href="registerAccount.jsp" style="font-size: 12px;margin-right: 10px">Start Here</a></li>
+                                        <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px"><a class="dropdown-item" href="..\login.jsp" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Login</a></li>
+                                        <li style="margin-bottom: 10px;margin-top: 10px"><p style="display: inline;font-size: 12px;margin-left: 10px">New customer?</p><a href="..\registerAccount.jsp" style="font-size: 12px;margin-right: 10px">Start Here</a></li>
                                     </ul>
                                 </div>
                             </c:if>
@@ -164,7 +164,16 @@ function backZoom(a) {    //backzoomitem in home.jsp
                                             <a href="#" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
                                         </li>
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
-                                            <a class="dropdown-item" href="..\login" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            <c:if test="${not empty  CID}">
+                                                <a class="dropdown-item" href="..\login?urlB=home\brand?cid=${CID}" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            </c:if>
+                                            <c:if test="${not empty  CGID}">
+                                                <a class="dropdown-item" href="..\login?urlB=home\brand?cid=${CID}&cgid=${CGID}" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            </c:if>
+                                            <c:if test="${nameSearch != null}">
+                                                <a class="dropdown-item" href="..\login?urlS=home/searchProduct?name=${nameSearch}" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a> 
+                                            </c:if>   
+                                             
                                         </li>
                                     </ul>
                                 </div>

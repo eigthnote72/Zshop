@@ -35,7 +35,7 @@ public class searchProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,24 +50,25 @@ public class searchProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GetDataDAO  db = new GetDataDAO();
+        GetDataDAO db = new GetDataDAO();
         String nameSearch = "";
-                nameSearch = request.getParameter("name");
+        nameSearch = request.getParameter("name");
         String CID = request.getParameter("cid");
         String CGID = request.getParameter("cgid");
         ArrayList<Category> listC = db.getBrand();
         ArrayList<Category_Group> listCG = db.getAllCategory_Group();
-        if(nameSearch.isEmpty() || nameSearch == null){  // lỗi
-            request.getRequestDispatcher("home");
+        ArrayList<Product> listP = new ArrayList<>();
+        if (nameSearch.isEmpty() || nameSearch == null) {  
+            response.sendRedirect("../home");
+        } else {
+            listP = db.getProductSearchByName(nameSearch);
+            request.setAttribute("listP", listP);
+            request.setAttribute("listCG", listCG);
+            request.setAttribute("listC", listC);
+            request.setAttribute("nameSearch", nameSearch);
+            request.getRequestDispatcher("../brand.jsp").forward(request, response);
         }
-        ArrayList<Product> listP = db.getProductSearchByName(nameSearch);
-        
-        request.setAttribute("listP", listP);
-        request.setAttribute("listCG", listCG);
-        request.setAttribute("listC", listC);
-        request.setAttribute("nameSearch", nameSearch);
-        request.getRequestDispatcher("../brand.jsp").forward(request, response);
-        
+
     }
 
     /**

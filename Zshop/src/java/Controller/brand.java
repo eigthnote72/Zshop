@@ -72,10 +72,11 @@ public class brand extends HttpServlet {
                 }
             }
                 
-                
+            request.setAttribute("CGID", CGID);
         }else{
             listP = db.getProductbyCategory(CID);
         }
+        request.setAttribute("CID", CID);
         request.setAttribute("nameSearch", nameSearch);
         request.setAttribute("CGName", CGName);
         request.setAttribute("listCG", listCG);

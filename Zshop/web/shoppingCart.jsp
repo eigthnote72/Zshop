@@ -149,7 +149,7 @@
                                             <a href="setProfileAccount" style="font-size: 13px;margin-right: 10px;text-decoration: none;">View Profile</a>
                                         </li>
                                         <li style="margin-left: 20px;margin-right: 20px;margin-top: 10px; margin-bottom: 10px">
-                                            <a class="dropdown-item" href="login" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
+                                            <a class="dropdown-item" href="login?url=shoppingCart" style="text-align: center;background-color: #f0c14b;border-radius: 3px">Sign Out</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -221,7 +221,7 @@
                                     <form action="shoppingCart" method="post">
                                         <td style="width: 190px;text-align: center;padding-bottom: 50px">
                                             <div class="quantity">
-                                                <div style="border: 1px solid rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801);margin-left: 25%;margin-right: 25%;padding-bottom: 5px;padding-top: 5px" >
+                                                <div style="border: 1px solid rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801);margin-left: 20%;margin-right: 20%;padding-bottom: 5px;padding-top: 5px" >
 
                                                     <button value="-" name="button" type="submit" style="border: rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801)"><i class="bi bi-dash" ><input style="display: none" name="idP" value="<%=listItem.get(i).getP().getProductID()%>" /></i></button>
                                                     <div  style="font-size: 18px;display: inline;margin-left: 7px;margin-right: 7px"><%=listItem.get(i).getQuantity()%></div>

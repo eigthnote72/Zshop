@@ -212,10 +212,10 @@
                                         <div class="sizes mt-5">
                                             <h6 class="text-uppercase">Số lượng</h6> 
                                             <div class="quantity">
-                                                <div style="border: 1px solid rgba(238, 235, 235, 0.801);background: rgba(238, 235, 235, 0.801);padding-bottom: 5px;padding-top: 5px" >
+                                                <div style="border: 1px solid rgba(238, 235, 235, 0.801);padding-bottom: 5px;padding-top: 5px;width: 100px" >
 
                                                     <i class="bi bi-dash" onclick="down()" style="cursor: pointer"></i>
-                                                    <div  style="font-size: 18px;display: inline;margin-left: 7px;margin-right: 7px;"><input type="number" name="quantity" value="1" id="quantity" readonly style="width: 40px;border: #f3ebeb;border-radius: 5px;text-align: center"/></div>
+                                                    <div  style="font-size: 18px;display: inline;margin-left: 7px;margin-right: 7px;text-align: center"><input type="number" name="quantity" value="1" id="quantity" readonly style="width: 40px;border: #f3ebeb;border-radius: 5px;text-align: center"/></div>
                                                     <i class="bi bi-plus-lg" onclick="up()" style="cursor: pointer"></i>
 
                                                 </div>

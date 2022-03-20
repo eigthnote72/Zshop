@@ -56,7 +56,7 @@
        
                   <div class="form-outline mb-4">
                     <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Name" name="name" />
-                  </div>
+                  </div> 
 
                   <div class="form-outline mb-4">
                     <input type="text" id="form2Example18" class="form-control form-control-lg" placeholder="Username"  name="user" style="display: inline;"/>
@@ -70,10 +70,11 @@
                     <input type="password" id="form2Example28" class="form-control form-control-lg"  placeholder="Re-enter Password" name="rePass" />
                   </div>
                   <div class="form-outline mb-4">
-                    <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Email" name="email" />
+                    <input type="text" id="form2Example28" class="form-control form-control-lg"   placeholder="Email" name="email" />
                   </div>
                   <div class="form-outline mb-4">
-                    <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Phone Number" name="phone" />
+                      <input type="text" id="form2Example28" class="form-control form-control-lg" pattern="[0-9]{10}"  oninvalid="this.setCustomValidity('Phone must be a number of length 10')"
+                       oninput="this.setCustomValidity('')"  placeholder="Phone Number" name="phone" />
                   </div>
                   <div class="form-outline mb-4">
                     <input type="text" id="form2Example28" class="form-control form-control-lg"  placeholder="Address" name="address" />
@@ -81,11 +82,17 @@
 
                   
                   
-                 
+                  <c:if test="${mess == null}">
+                      <span style="color: red;font-size: 16px">${mess}</span>
+                  </c:if>
                   
       
-                  <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit">Create</button>
+                  <div class="pt-1 mb-4" style="display: inline">
+                    <button class="btn btn-info btn-lg btn-block" type="submit" style="color: white;">Create</button>
+                  </div>
+                      
+                      <div class="pt-1 mb-4" style="display: inline;float: right;">
+                          <button class="btn btn-info btn-lg btn-block" type="submit" style="background-color: #EDBB0E;border-color:#EDBB0E "> <a href="login" style="text-decoration: none;color: white;">Login</a> </button>
                   </div>
       
                   

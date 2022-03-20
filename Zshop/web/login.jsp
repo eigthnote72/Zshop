@@ -78,7 +78,7 @@
                                         <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
                                     </div>
 
-                                    <p>Don't have an account? <a href="#!" class="link-info">Register here</a></p>
+                                    <p>Don't have an account? <a href="registerAccount.jsp" class="link-info">Register here</a></p>
 
                                 </form>
 
