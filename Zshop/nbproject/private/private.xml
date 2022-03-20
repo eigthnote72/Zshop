@@ -13,14 +13,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/productDetail.jsp</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/login.java</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/setProfileAccount.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/shoppingCart.jsp</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/productDetail.java</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/DAL/GetDataDAO.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/home.jsp</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/brand.jsp</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/shoppingCart.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/brand.java</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/insertAccount.java</file>
-            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/registerAccount.jsp</file>
             <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/login.jsp</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/setProfileAccount.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/login.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/productDetail.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/footer.jsp</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/src/java/Controller/searchProduct.java</file>
+            <file>file:/C:/Users/Eighth_Note/Documents/Zshop/Zshop/web/registerAccount.jsp</file>
         </group>
     </open-files>
 </project-private>

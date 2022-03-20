@@ -165,14 +165,15 @@
         <!-- Header End -->
 
         <!-- Hero Section End -->
-
+         
         <!-- Breadcrumb Section Begin -->
         <section class="breadcrumb-section set-bg" data-setbg="image\ShoppingCard.jpg" >
+            
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center" style="margin-top: 50px">
                         <div class="breadcrumb__text" >
-                            <h2 style="color: black;margin-top: 70px;font-weight: 900px" >Shopping Cart</h2>
+                            <h2 style="color: black;margin-top: 70px;font-weight: 700" >Shopping Cart</h2>
                             <div class="breadcrumb__option">
 
 
@@ -183,6 +184,8 @@
                 </div>
             </div>
         </section>
+        
+        
         <!-- Breadcrumb Section End -->
 
         <!-- Shoping Cart Section Begin -->
@@ -276,6 +279,7 @@
                                 </tbody>
                             </table>
                             <c:if test="${sessionScope.order == null}">
+                                
                                 <div style="text-align: center;margin-top: 30px;font-size: 20px">Danh sách trống</div>
                             </c:if>
                         </div>
@@ -345,7 +349,9 @@
 
 
 
-
+        <div style="margin-top: 120px;color: white">
+            a
+        </div>
         <!-- Footer Section End -->
         <jsp:include page="footer.jsp"></jsp:include>
 

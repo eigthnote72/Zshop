@@ -21,10 +21,13 @@
 }
 .site-footer{
     background-color: rgb(187, 184, 184);
+    
 }
-</style>
-<footer class="site-footer background-black-2" style="margin-top: 100px">
 
+</style>
+
+<footer class="site-footer background-black-2 " style="margin-top: 100px;float: bottom">
+        
             <div class="container">
                 <div class="row" >
 
@@ -88,3 +91,5 @@
                 </div><!-- /.container -->
             </div><!-- /.bottom-footer -->
         </footer><!-- /.site-footer -->
+        
+      

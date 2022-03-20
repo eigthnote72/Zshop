@@ -168,7 +168,7 @@ and open the template in the editor.
                     <img  src="image\home_samsung.jpg" width="100%" height="587px" style="margin-top: 60px">
                     <div style="color:white;top:0;margin-left:10%;padding-top:400px;position:absolute;">
                         <div style="font-size: 35px;margin-bottom: 16px;">Galaxy Z Fold3</div>
-                        <a href="productDetail?pid=IP1264" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
+                        <a href="home/brand?cid=SS&cgid=SSZFOLD3" style="background-color: #0071e3; color: white; text-decoration: none; padding-left: 5px; padding-right: 7px; padding-top: 2px; padding-bottom: 3px; border-radius: 10px;margin-left: 145px">Buy Now</a>
                     </div>
 
 
