@@ -65,38 +65,56 @@ public class shoppingCart extends HttpServlet {
         Account account = (Account) session.getAttribute("account");
         // xử get account và list brand  (END)
         Order order = (Order) request.getSession().getAttribute("order");
-        if(order == null){
+        if (order == null) {
+            String mess = (String) request.getSession().getAttribute("mess");
+            String messx = "";
+            if (mess != null) {
+
+                if (mess.equals("done")) {
+                    session.removeAttribute("mess");
+                    messx = mess;
+                }
+            }
+//
+            request.setAttribute("mess", messx);
             request.setAttribute("account", account);
             request.setAttribute("listC", listC);
             request.setAttribute("listCG", listCG);
             request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
-        }else{
+        } else {
             ArrayList<ItemAddToCart> listItem = order.getItem();
-        System.out.println(listItem.size());
-        
-        BigInteger totalBI = new BigInteger("0");
+            System.out.println(listItem.size());
 
-        for (int i = 0; i < listItem.size(); i++) {
-            BigInteger a = new BigInteger(String.valueOf(listItem.get(i).getQuantity()));
-            BigInteger b = new BigInteger(listItem.get(i).getPrice());
-            totalBI = totalBI.add(a.multiply(b));
-            
-            
-            
+            BigInteger totalBI = new BigInteger("0");
 
+            for (int i = 0; i < listItem.size(); i++) {
+                BigInteger a = new BigInteger(String.valueOf(listItem.get(i).getQuantity()));
+                BigInteger b = new BigInteger(listItem.get(i).getPrice());
+                totalBI = totalBI.add(a.multiply(b));
+
+            }
+
+            String total = cvString(totalBI.toString());
+            String messx = "";
+            String mess = (String) request.getSession().getAttribute("mess");
+
+            if (mess != null) {
+
+                if (mess.equals("done")) {
+                    session.removeAttribute("mess");
+                    messx = mess;
+                }
+            }
+//
+            request.setAttribute("mess", messx);
+            request.setAttribute("account", account);
+            request.setAttribute("listC", listC);
+            request.setAttribute("listCG", listCG);
+            request.setAttribute("total", total);
+            request.setAttribute("listItem", listItem);
+            request.setAttribute("order", order);
+            request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
         }
-        
-        String total = cvString(totalBI.toString());
-
-        request.setAttribute("account", account);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listCG", listCG);
-        request.setAttribute("total", total);
-        request.setAttribute("listItem", listItem);
-        request.setAttribute("order", order);
-        request.getRequestDispatcher("shoppingCart.jsp").forward(request, response);
-        }
-        
 
     }
 
@@ -116,36 +134,36 @@ public class shoppingCart extends HttpServlet {
         HttpSession session = request.getSession();
         Order order = (Order) request.getSession().getAttribute("order");
         ArrayList<ItemAddToCart> listItem = order.getItem();
-        if(button.equals("-")){
-            for(int i=0;i<listItem.size();i++){
-                if(listItem.get(i).getP().getProductID().equals(idP)){
-                    if(listItem.get(i).getQuantity()==1){
+        if (button.equals("-")) {
+            for (int i = 0; i < listItem.size(); i++) {
+                if (listItem.get(i).getP().getProductID().equals(idP)) {
+                    if (listItem.get(i).getQuantity() == 1) {
                         listItem.remove(i);
-                    }else{
-                        listItem.get(i).setQuantity(listItem.get(i).getQuantity()-1);
+                    } else {
+                        listItem.get(i).setQuantity(listItem.get(i).getQuantity() - 1);
                     }
                 }
             }
-        }else if(button.equals("+")){
-             for(int i=0;i<listItem.size();i++){
-                if(listItem.get(i).getP().getProductID().equals(idP)){
-                        listItem.get(i).setQuantity(listItem.get(i).getQuantity()+1);
+        } else if (button.equals("+")) {
+            for (int i = 0; i < listItem.size(); i++) {
+                if (listItem.get(i).getP().getProductID().equals(idP)) {
+                    listItem.get(i).setQuantity(listItem.get(i).getQuantity() + 1);
                 }
             }
-        }else if(button.equals("x")){
-            for(int i=0;i<listItem.size();i++){
-                if(listItem.get(i).getP().getProductID().equals(idP)){
-                        listItem.remove(i);
+        } else if (button.equals("x")) {
+            for (int i = 0; i < listItem.size(); i++) {
+                if (listItem.get(i).getP().getProductID().equals(idP)) {
+                    listItem.remove(i);
                 }
             }
         }
-        
-        if(listItem.size() == 0){
+
+        if (listItem.size() == 0) {
             session.removeAttribute("order");
-        }else{
+        } else {
             session.setAttribute("order", order);
         }
-        
+
         response.sendRedirect("shoppingCart");
     }
 
@@ -182,7 +200,7 @@ public class shoppingCart extends HttpServlet {
         for (int i = price.length() - 1; i >= 0; i--) {
             result = result + price.charAt(i);
         }
-        if(count%3==0){
+        if (count % 3 == 0) {
             result = result.substring(1);
         }
         return result;

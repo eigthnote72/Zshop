@@ -9,7 +9,7 @@
         <servlet-class>Controller.productManagement</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>addProduct</servlet-name>
+        <servlet-name>insertProduct</servlet-name>
         <servlet-class>Controller.insertProduct</servlet-class>
     </servlet>
     <servlet>
@@ -52,6 +52,22 @@
         <servlet-name>searchProduct</servlet-name>
         <servlet-class>Controller.searchProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>category_groupManager</servlet-name>
+        <servlet-class>Controller.category_groupManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertCategoryGroup</servlet-name>
+        <servlet-class>Controller.insertCategoryGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteCategory_Group</servlet-name>
+        <servlet-class>Controller.deleteCategory_Group</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateCategory_Group</servlet-name>
+        <servlet-class>Controller.updateCategory_Group</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getProducts</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -61,8 +77,8 @@
         <url-pattern>/productManagement</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>addProduct</servlet-name>
-        <url-pattern>/addProduct</url-pattern>
+        <servlet-name>insertProduct</servlet-name>
+        <url-pattern>/insertProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateProduct</servlet-name>
@@ -103,6 +119,22 @@
     <servlet-mapping>
         <servlet-name>searchProduct</servlet-name>
         <url-pattern>/home/searchProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>category_groupManager</servlet-name>
+        <url-pattern>/category_groupManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertCategoryGroup</servlet-name>
+        <url-pattern>/insertCategoryGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCategory_Group</servlet-name>
+        <url-pattern>/deleteCategory_Group</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateCategory_Group</servlet-name>
+        <url-pattern>/updateCategory_Group</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -140,11 +140,15 @@ public class shoppingCartControl extends HttpServlet {
 
             // viết thêm hàm để lưu data order vào database (thiếu code)
             session.removeAttribute("order");
+            
             mess ="done";
+            
         }else{
             mess = "failed";
         }
-//        request.setAttribute("mess", mess);
+        
+        request.getSession().setAttribute("mess", mess);
+
         response.sendRedirect("shoppingCart");
 //        request.getRequestDispatcher("shoppingCart").forward(request, response);
 

@@ -32,7 +32,7 @@ public class deleteProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Account listA = (Account)session.getAttribute("account");
@@ -43,6 +43,8 @@ public class deleteProduct extends HttpServlet {
         
         GetDataDAO db = new GetDataDAO();
         db.deleteProduct(id);
+        String messP = "Xóa thành công sản phẩm có ID : " +id;
+        request.getSession().setAttribute("messP", messP);
         response.sendRedirect("productManagement");
         }
     }

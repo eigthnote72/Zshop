@@ -38,41 +38,57 @@ public class updateProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Account listA = (Account)session.getAttribute("account");
-        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
+        Account listA = (Account) session.getAttribute("account");
+        if (session.getAttribute("account") == null || !listA.getPosition().equals("admin")) {
             response.sendRedirect("home");
-        }else{
-        GetDataDAO db = new GetDataDAO();
-        String idInput = request.getParameter("pid");
-        ArrayList<Category> listC = db.getBrand();
-        ArrayList<Product> listP = db.getAllProductToUpdate();
-        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
+        } else {
+            GetDataDAO db = new GetDataDAO();
+            ArrayList<Category_Group> listCG = db.getAllCategory_Group();
+            ArrayList<Category> listC = db.getBrand();
+            String idInput = request.getParameter("pid");
 
-        Product pUpdate = new Product();
-        for (int i = 0; i < listP.size(); i++) {
-            if (idInput.equals(listP.get(i).getProductID())) {
-                pUpdate = listP.get(i);
+            ArrayList<Product> listP = db.getAllProductDESC();
+            ArrayList<Product> listPUpdate = db.getAllProductToUpdate();
+            Product uP = new Product();
+            for (int i = 0; i < listPUpdate.size(); i++) {
+                if(listPUpdate.get(i).getProductID().equals(idInput)){
+                    uP = listPUpdate.get(i);
+                }
             }
-        }
-
-        String categoryID = "";
-        for (int i = 0; i < listCG.size(); i++) {
-            if (listCG.get(i).getCGID().equals(pUpdate.getCategory_groupID())) {
-                categoryID = listCG.get(i).getCID();
+            // phaan trang 
+            int pageIndex;
+            if (request.getParameter("page") == null) {
+                pageIndex = 1;
+            } else {
+                pageIndex = Integer.parseInt(request.getParameter("page"));
             }
-        }
-        String name = pUpdate.getProductName().replace(pUpdate.getStorage(), "");
 
-        pUpdate.setProductName(name);
+            int totalItem = listP.size();
+            int totalItemInPage = 11;
+            int totalPage = 0;
+            if (totalItem % totalItemInPage == 0) {
+                totalPage = totalItem / totalItemInPage;
+            } else {
+                totalPage = totalItem / totalItemInPage + 1;
+            }
 
-        String unit = pUpdate.getStorage().replace(pUpdate.getProductID().replace(pUpdate.getCategory_groupID(), ""), "");
+            int start = (pageIndex - 1) * totalItemInPage;
+            int end = Math.min(pageIndex * totalItemInPage, totalItem);
 
-        request.setAttribute("idInput",idInput);
-        request.setAttribute("categoryID", categoryID);
-        request.setAttribute("unit", unit);
-        request.setAttribute("listC", listC);
-        request.setAttribute("pUpdate", pUpdate);
-        request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
+            ArrayList<Product> listPByPage = new ArrayList<>();
+            for (int i = start; i < end; i++) {
+                listPByPage.add(listP.get(i));
+            }
+
+            
+            request.setAttribute("uP", uP);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("pageIndex", pageIndex);
+            request.setAttribute("listProducts", listPByPage);
+            request.setAttribute("listCG", listCG);
+            request.setAttribute("listC", listC);
+            request.setAttribute("edit", "edit");
+            request.getRequestDispatcher("productManagement.jsp").forward(request, response);
         }
     }
 
@@ -104,33 +120,21 @@ public class updateProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         GetDataDAO db = new GetDataDAO();
-        ArrayList<Category_Group> listCG = db.getAllCategory_Group();
-        ArrayList<Product> listP = db.getAllProduct();
-        String id = request.getParameter("id");
+        ArrayList<Product> listP = db.getAllProductToUpdate();
+        String id = request.getParameter("pid");
 
-        String name = request.getParameter("name");
-        String price = request.getParameter("price");
-        String image = request.getParameter("image");
-        String CId = request.getParameter("category");
 
-        String CGID = "";
-        for (int i = 0; i < listP.size(); i++) {
-            if (listP.get(i).getProductID().equals(id)) {
-                CGID = listP.get(i).getCategory_groupID();
-            }
-        }
+        String price = request.getParameter("pprice");
+        String image = request.getParameter("pimage");
 
-        for (int i = 0; i < listCG.size(); i++) {
-            if (listCG.get(i).getCGID().equals(CGID)) {
-                if (!listCG.get(i).getCID().equals(CId)) {
-                    db.updateCategory_Group(CGID, CId);
-                }
-            }
-        }
 
-        db.updateProduct(name, price, image, id);
+        db.updateProduct(price, image, id);
+       
+        
+        String messP = "Đã cập nhật thành công !";
+        request.getSession().setAttribute("messP", messP);
         response.sendRedirect("productManagement");
     }
 

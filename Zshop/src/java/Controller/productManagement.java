@@ -8,6 +8,7 @@ package Controller;
 import DAL.GetDataDAO;
 import Model.Account;
 import Model.Category;
+import Model.Category_Group;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,21 +37,69 @@ public class productManagement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Account listA = (Account)session.getAttribute("account");
-        if(session.getAttribute("account") == null ||  !listA.getPosition().equals("admin")){
+        Account listA = (Account) session.getAttribute("account");
+        if (session.getAttribute("account") == null || !listA.getPosition().equals("admin")) {
             response.sendRedirect("home");
-        }else{
+        } else {
             GetDataDAO s = new GetDataDAO();
-        ArrayList<Product> listProducts = s.getAllProduct();
-        ArrayList<Category> listC = s.getBrand();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listProducts", listProducts);
-        request.getRequestDispatcher("productManagement.jsp").forward(request, response);
+
+            
+            ArrayList<Product> listP = s.getAllProductDESC();
+            // Phân trang
+            int pageIndex;
+            if (request.getParameter("page") == null) {
+                pageIndex = 1;
+            } else {
+                pageIndex = Integer.parseInt(request.getParameter("page"));
+            }
+
+            
+            
+
+            int totalItem = listP.size();
+            int totalItemInPage = 11;
+            int totalPage = 0;
+            if (totalItem % totalItemInPage == 0) {
+                totalPage = totalItem / totalItemInPage;
+            } else {
+                totalPage = totalItem / totalItemInPage + 1;
+            }
+
+            int start = (pageIndex - 1) * totalItemInPage;
+            int end = Math.min(pageIndex * totalItemInPage, totalItem);
+
+            ArrayList<Product> listPByPage = new ArrayList<>();
+            for (int i = start; i < end; i++) {
+                listPByPage.add(listP.get(i));
+            }
+//            
+            // alert
+            
+            String messP = "";
+            String messPx = (String) request.getSession().getAttribute("messP");
+
+            if (messPx != null) {
+
+                
+                    
+                    messP = messPx;
+                    session.removeAttribute("messP");
+            }
+//
+            request.setAttribute("messP", messP);
+            
+            
+            ArrayList<Category_Group> listCG = s.getAllCategory_Group();
+            request.setAttribute("totalPage", totalPage);
+
+            request.setAttribute("listCG", listCG);
+            request.setAttribute("pageIndex", pageIndex);
+            ArrayList<Category> listC = s.getBrand();
+            request.setAttribute("listC", listC);
+            request.setAttribute("listProducts", listPByPage);
+            request.getRequestDispatcher("productManagement.jsp").forward(request, response);
         }
-        
-        
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

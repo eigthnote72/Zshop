@@ -28,7 +28,14 @@ public class GetDataDAO extends BaseDAO {
         ArrayList<Product> listProduct = new ArrayList<>();
 
         try {
-            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products";
+            String sql = "SELECT [STT]\n"
+                    + "      ,[ProductID]\n"
+                    + "      ,[ProductName]\n"
+                    + "      ,[ProductPrice]\n"
+                    + "      ,[Storage]\n"
+                    + "      ,[Image]\n"
+                    + "      ,[CGID]\n"
+                    + "  FROM [Zshop].[dbo].[Products] ";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -37,33 +44,70 @@ public class GetDataDAO extends BaseDAO {
                 p.setProductName(rs.getString("ProductName"));
 
                 String getPrice = rs.getString("ProductPrice");
-                
+
                 String result = cvString(getPrice);
 //                float temp1 = Float.parseFloat(rs.getString("ProductPrice"));
 //                float temp2 = 8000000;
-                
-                
 
                 p.setProductPrice(result);
                 p.setStorage(rs.getString("Storage"));
                 p.setImage(rs.getString("Image"));
                 p.setCategory_groupID(rs.getString("CGID"));
-                
-                    listProduct.add(p);
-                
-                
+
+                listProduct.add(p);
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listProduct;
     }
-    
+
+    public ArrayList<Product> getAllProductDESC() {
+        ArrayList<Product> listProduct = new ArrayList<>();
+
+        try {
+            String sql = "SELECT "
+                    + "       [ProductID]\n"
+                    + "      ,[ProductName]\n"
+                    + "      ,[ProductPrice]\n"
+                    + "      ,[Storage]\n"
+                    + "      ,[Image]\n"
+                    + "      ,[CGID]\n"
+                    + "  FROM [Zshop].[dbo].[Products]\n"
+                    + "  order by  STT desc";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProductID(rs.getString("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+
+                String getPrice = rs.getString("ProductPrice");
+
+                String result = cvString(getPrice);
+//                float temp1 = Float.parseFloat(rs.getString("ProductPrice"));
+//                float temp2 = 8000000;
+
+                p.setProductPrice(result);
+                p.setStorage(rs.getString("Storage"));
+                p.setImage(rs.getString("Image"));
+                p.setCategory_groupID(rs.getString("CGID"));
+
+                listProduct.add(p);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listProduct;
+    }
+
     public ArrayList<Product> getAllProductToUpdate() {
         ArrayList<Product> listProduct = new ArrayList<>();
 
         try {
-            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products";
+            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products ";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -81,8 +125,8 @@ public class GetDataDAO extends BaseDAO {
         }
         return listProduct;
     }
-    
-    public ArrayList<Category> getBrand (){
+
+    public ArrayList<Category> getBrand() {
         ArrayList<Category> listBrand = new ArrayList<>();
         try {
             String sql = "SELECT [CID],[CName] FROM [Zshop].[dbo].[Category]";
@@ -98,15 +142,15 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listBrand;
-        
+
     }
-    
-    public ArrayList<Product> getListProductByID (String id){
+
+    public ArrayList<Product> getListProductByID(String id) {
         ArrayList<Product> listPByID = new ArrayList<>();
         try {
             String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+id+"%");
+            statement.setString(1, "%" + id + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
@@ -122,10 +166,10 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listPByID;
-        
+
     }
-    
-    public ArrayList<Category_Group> getAllCategory_Group (){
+
+    public ArrayList<Category_Group> getAllCategory_Group() {
         ArrayList<Category_Group> listCG = new ArrayList<>();
         try {
             String sql = "SELECT  [CGID],[CGName],[CID] FROM [Zshop].[dbo].[Category_Group]";
@@ -142,13 +186,11 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCG;
-        
+
     }
-    
-    
-    
-    public void insertProduct(Product a){
-         try {
+
+    public void insertProduct(Product a) {
+        try {
             String sql = "INSERT INTO Products (ProductID,ProductName, ProductPrice, Storage,Image , CGID) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getProductID());
@@ -161,27 +203,23 @@ public class GetDataDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-         
+
     }
-    
-    public void insertImage(String CGID,String urlImage){
-         try {
+
+    public void insertImage(String CGID, String urlImage) {
+        try {
             String sql = "INSERT INTO [ImageProduct] ([CGID],[URLImage]) VALUES (?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, CGID);
             statement.setString(2, urlImage);
-            
+
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
-    
-    public  void insertCategory_Group(Category_Group cg){
+
+    public void insertCategory_Group(Category_Group cg) {
         try {
             String sql = " INSERT INTO [Category_Group] ([CGID], [CGName], [CID]) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -193,58 +231,86 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void updateProduct(String name, String price, String image, String productID){
+
+    public void updateProduct(String price, String image, String productID) {
         try {
-            String sql = " UPDATE [Products]\n" +
-                           "SET [ProductName] = ? , [ProductPrice] = ?,[Image] = ? where [ProductID] = ?";
+            String sql = " UPDATE [Products]\n"
+                    + "SET  [ProductPrice] = ?,[Image] = ? where [ProductID] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, price);
+            statement.setString(2, image);
+            statement.setString(3, productID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateProduct(String name, String productID) {
+        try {
+            String sql = " UPDATE [Products]\n"
+                    + "SET [ProductName] = ? where [ProductID] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
-            statement.setString(2, price);
-            statement.setString(3, image);
-            statement.setString(4, productID);
+            statement.setString(2, productID);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void updateCategory_Group(String CGID , String CID){
+
+    public void updateCategory_Group(String CGID, String CGName, String CID) {
         try {
-            
-            String sql = "  UPDATE [Category_Group]\n" +
-                                   "SET [CID] = ?\n" +
-                                   "WHERE [CGID] = ?";
+
+            String sql = "  UPDATE [Category_Group]\n"
+                    + "SET [CGName] = ?\n"
+                    + ",[CID] = ?\n"
+                    + "WHERE [CGID] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, CID);
-            statement.setString(2, CGID);
+            statement.setString(1, CGName);
+            statement.setString(2, CID);
+            statement.setString(3, CGID);
             statement.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void deleteProduct(String idProduct){
-           
-            try {
+
+    public void deleteProduct(String idProduct) {
+
+        try {
             String sql = "DELETE Products where ProductID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, idProduct);
             statement.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public ArrayList<Product> getProductbyCategory(String CID){
+
+    public void deleteCategory_Group(String cgid) {
+
+        try {
+            String sql = "DELETE Category_Group where CGID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, cgid);
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ArrayList<Product> getProductbyCategory(String CID) {
         ArrayList<Product> listP = new ArrayList<>();
         try {
-            
-            String sql = "select [ProductID],[ProductName],[ProductPrice],[Storage],[Image],p.[CGID] from Products p inner join Category_Group c\n" +
-                         "on p.CGID  = c.CGID \n" +
-                         "where  c.CID = ?";
+
+            String sql = "select [ProductID],[ProductName],[ProductPrice],[Storage],[Image],p.[CGID] from Products p inner join Category_Group c\n"
+                    + "on p.CGID  = c.CGID \n"
+                    + "where  c.CID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, CID);
             ResultSet rs = statement.executeQuery();
@@ -277,22 +343,22 @@ public class GetDataDAO extends BaseDAO {
 
                 p.setProductPrice(result);
                 p.setStorage(rs.getString("Storage"));
-                String img = "..\\"+rs.getString("Image");
+                String img = "..\\" + rs.getString("Image");
                 p.setImage(img);
                 p.setCategory_groupID(rs.getString("CGID"));
                 listP.add(p);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listP;
     }
-    
-    public ArrayList<Account> getListAccount(){
+
+    public ArrayList<Account> getListAccount() {
         ArrayList<Account> listA = new ArrayList<>();
         try {
-            
+
             String sql = "SELECT [idAcc],[username],[password],[role],[email],[phone],[name],[address] FROM [Zshop].[dbo].[Account]";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
@@ -308,17 +374,17 @@ public class GetDataDAO extends BaseDAO {
                 a.setAddress(rs.getString("address"));
                 listA.add(a);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listA;
     }
-    
-    public void insertAccount(Account a){
+
+    public void insertAccount(Account a) {
         try {
-            String sql = " INSERT INTO [Account] ([username], [password],[role],[email],[phone],[name],[address] )\n" +
-                           "VALUES (?,?,?,?,?,?,?)";
+            String sql = " INSERT INTO [Account] ([username], [password],[role],[email],[phone],[name],[address] )\n"
+                    + "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getUsername());
             statement.setString(2, a.getPassword());
@@ -332,14 +398,14 @@ public class GetDataDAO extends BaseDAO {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Account getAccountLogin(String user,String pass){
+
+    public Account getAccountLogin(String user, String pass) {
         Account a = new Account();
         try {
-            
-            String sql = "SELECT [idAcc],[username],[password],[role],[email],[phone],[name],[address] FROM [Account]\n" +
-                         "  where username = ?\n" +
-                         "  and [password] = ?";
+
+            String sql = "SELECT [idAcc],[username],[password],[role],[email],[phone],[name],[address] FROM [Account]\n"
+                    + "  where username = ?\n"
+                    + "  and [password] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user);
             statement.setString(2, pass);
@@ -353,22 +419,21 @@ public class GetDataDAO extends BaseDAO {
                 a.setPhone(rs.getString("phone"));
                 a.setName(rs.getString("name"));
                 a.setAddress(rs.getString("address"));
-                
+
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
     }
-    
-    
-    public Product getProductByID(String id){
+
+    public Product getProductByID(String id) {
         Product p = new Product();
         try {
             String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+id+"%");
+            statement.setString(1, "%" + id + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 p.setProductID(rs.getString("ProductID"));
@@ -384,13 +449,13 @@ public class GetDataDAO extends BaseDAO {
         }
         return p;
     }
-    
-    public Product getProductCVSTringByID(String id){
+
+    public Product getProductCVSTringByID(String id) {
         Product p = new Product();
         try {
             String sql = "Select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products where ProductID like ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+id+"%");
+            statement.setString(1, "%" + id + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 p.setProductID(rs.getString("ProductID"));
@@ -408,10 +473,10 @@ public class GetDataDAO extends BaseDAO {
         }
         return p;
     }
-    
+
     String cvString(String inputPrice) {
         int count = 0;
-        int count1=0;
+        int count1 = 0;
         String price = "";
         String temp = "";
         String a[] = inputPrice.split("");
@@ -432,16 +497,16 @@ public class GetDataDAO extends BaseDAO {
         for (int i = price.length() - 1; i >= 0; i--) {
             result = result + price.charAt(i);
         }
-        if(count%3==0){
+        if (count % 3 == 0) {
             result = result.substring(1);
         }
         return result;
     }
-    
-    public ArrayList<Category_Group> getListCategory_GroupByBrand(String CID){
+
+    public ArrayList<Category_Group> getListCategory_GroupByBrand(String CID) {
         ArrayList<Category_Group> listCG = new ArrayList<>();
         try {
-            
+
             String sql = "SELECT [CGID],[CGName],[CID] FROM [Category_Group] where CID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, CID);
@@ -453,24 +518,24 @@ public class GetDataDAO extends BaseDAO {
                 cg.setCID("CID");
                 listCG.add(cg);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCG;
-        
+
     }
-    
-    public ArrayList<Product> getProductByCategory_Group(String CID, String CGID){
+
+    public ArrayList<Product> getProductByCategory_Group(String CID, String CGID) {
         ArrayList<Product> listP = new ArrayList<>();
         try {
-            
-            String sql = "SELECT p.[ProductID],p.[ProductName],p.[ProductPrice],p.[Storage],p.[Image],p.[CGID]\n" +
-                         "FROM [Products] p inner join Category_Group c\n" +
-                         "on p.CGID = c.CGID\n" +
-                         "where c.CGID like ? and c.CID = ?";
+
+            String sql = "SELECT p.[ProductID],p.[ProductName],p.[ProductPrice],p.[Storage],p.[Image],p.[CGID]\n"
+                    + "FROM [Products] p inner join Category_Group c\n"
+                    + "on p.CGID = c.CGID\n"
+                    + "where c.CGID like ? and c.CID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,"%"+ CGID +"%");
+            statement.setString(1, "%" + CGID + "%");
             statement.setString(2, CID);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -482,46 +547,45 @@ public class GetDataDAO extends BaseDAO {
                 String result = cvString(getPrice);
                 p.setProductPrice(result);
                 p.setStorage(rs.getString("Storage"));
-                String img = "..\\"+rs.getString("Image");
+                String img = "..\\" + rs.getString("Image");
                 p.setImage(img);
                 p.setCategory_groupID(rs.getString("CGID"));
                 listP.add(p);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listP;
-        
+
     }
-     
-    public ArrayList<String> getImageByCGID(String CGID){
+
+    public ArrayList<String> getImageByCGID(String CGID) {
         ArrayList<String> listImg = new ArrayList<>();
         try {
-            
-            String sql = "  select URLImage from ImageProduct \n" +
-                     "  where CGID = ?";
+
+            String sql = "  select URLImage from ImageProduct \n"
+                    + "  where CGID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,CGID);
+            statement.setString(1, CGID);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 listImg.add(rs.getString("URLImage"));
             }
-      
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listImg;
     }
-    
-    public ArrayList<Product> getProductSearchByName(String inputName){
+
+    public ArrayList<Product> getProductSearchByName(String inputName) {
         ArrayList<Product> listP = new ArrayList<>();
         try {
-            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products \n" +
-                                   "where ProductName like ?";
+            String sql = "select ProductID,ProductName,ProductPrice,Storage,Image,CGID from Products \n"
+                    + "where ProductName like ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,"%"+ inputName+"%");
+            statement.setString(1, "%" + inputName + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
@@ -530,21 +594,17 @@ public class GetDataDAO extends BaseDAO {
                 String price = cvString(rs.getString("ProductPrice"));
                 p.setProductPrice(price);
                 p.setStorage(rs.getString("Storage"));
-                String img = "..\\"+rs.getString("Image");
+                String img = "..\\" + rs.getString("Image");
                 p.setImage(img);
                 p.setCategory_groupID(rs.getString("CGID"));
                 listP.add(p);
             }
-            
-            
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listP;
     }
-    
 
 //    public ArrayList<ImgProducts> getImage() {
 //        ArrayList<ImgProducts> listImg = new ArrayList<>();
@@ -567,5 +627,4 @@ public class GetDataDAO extends BaseDAO {
 //        }
 //        return listImg;
 //    }
-
 }

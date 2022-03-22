@@ -228,6 +228,16 @@ function backZoom(a) {    //backzoomitem in home.jsp
                 <%}%>
             </div>
         </section>
+            
+                <%if(listProducts.size() <= 5 && listProducts.size() >0){%>
+                 <div style="display: block;margin-top: 80px;color: white">a</div>
+                 <%}%> 
+                 
+                 <%if(listProducts.size() == 0){%>
+                 <div style="display: block;margin-top: 450px;color: white">a</div>
+                 <%}%> 
+                
+            
 
      <jsp:include page="footer.jsp" ></jsp:include>
     </body>

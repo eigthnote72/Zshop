@@ -24,6 +24,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Shopping Cart</title>
 
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>       
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -47,11 +50,16 @@
 
         </style>
     </head>
-    <script>
-        function displayOff() {
-            document.getElementById('checkout').style.display = 'none';
-            document.getElementById('input').style.display = 'block';
+    <script type="text/javascript">
+
+        function alertName() {
+            alert("Đặt hàng thành công !");
         }
+
+
+
+
+
     </script>
 
 
@@ -59,6 +67,12 @@
     <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
     <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
 
+
+    
+    <c:if test="${mess == 'done'}">
+        <script type="text/javascript"> window.onload = alertName;</script> 
+    </c:if>
+    
 
     <body>
         <!-- Header  -->
@@ -165,10 +179,12 @@
         <!-- Header End -->
 
         <!-- Hero Section End -->
-         
+
         <!-- Breadcrumb Section Begin -->
+
+
         <section class="breadcrumb-section set-bg" data-setbg="image\ShoppingCard.jpg" >
-            
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center" style="margin-top: 50px">
@@ -184,8 +200,10 @@
                 </div>
             </div>
         </section>
+
         
-        
+
+
         <!-- Breadcrumb Section End -->
 
         <!-- Shoping Cart Section Begin -->
@@ -235,36 +253,36 @@
                                         </td>
                                         <% totalI = temp1.multiply(temp2);%>
                                         <%      String total = totalI.toString();
-                                                int count = 0;
-                                                int count1 = 0;
-                                                String price = "";
-                                                String temp = "";
-                                                String arr[] = total.split("");
-                                                for (int j = total.length() - 1; j >= 0; j--) {
-                                                    count++;
-                                                    count1++;
-                                                    temp = temp + arr[j];
-                                                    if (count == 3) {
-                                                        count = 0;
-                                                        price = price + temp + ".";
-                                                        temp = "";
-                                                    }
+                                            int count = 0;
+                                            int count1 = 0;
+                                            String price = "";
+                                            String temp = "";
+                                            String arr[] = total.split("");
+                                            for (int j = total.length() - 1; j >= 0; j--) {
+                                                count++;
+                                                count1++;
+                                                temp = temp + arr[j];
+                                                if (count == 3) {
+                                                    count = 0;
+                                                    price = price + temp + ".";
+                                                    temp = "";
                                                 }
-                                                if (!temp.isEmpty()) {
-                                                    price = price + temp;
-                                                }
-                                                String result = "";
-                                                for (int j = price.length() - 1; j >= 0; j--) {
-                                                    result = result + price.charAt(j);
-                                                }
-                                                if (count % 3 == 0) {
-                                                    result = result.substring(1);
-                                                }
-                                            
+                                            }
+                                            if (!temp.isEmpty()) {
+                                                price = price + temp;
+                                            }
+                                            String result = "";
+                                            for (int j = price.length() - 1; j >= 0; j--) {
+                                                result = result + price.charAt(j);
+                                            }
+                                            if (count % 3 == 0) {
+                                                result = result.substring(1);
+                                            }
+
 
                                         %>
 
-                                        
+
                                         <td style="width: 200px;text-align: center;font-weight: 500;color: red;font-size:  18px;padding-bottom: 50px">
                                             <%=result%> ₫
                                         </td>
@@ -279,7 +297,7 @@
                                 </tbody>
                             </table>
                             <c:if test="${sessionScope.order == null}">
-                                
+
                                 <div style="text-align: center;margin-top: 30px;font-size: 20px">Danh sách trống</div>
                             </c:if>
                         </div>
@@ -308,7 +326,7 @@
                                 </ul>
                                 <c:if test="${sessionScope.account != null}">
                                     <form action="shoppingCartControl" method="post">
-                                        <button class="primary-btn" style="border: rgba(77, 70, 70, 0.397);width: 100%;margin-bottom: 30px;margin-top: 30px;background-color: #7fad39;padding-top: 7px;padding-bottom:  7px;border-radius: 7px" type="submit">
+                                        <button class="primary-btn"  style="border: rgba(77, 70, 70, 0.397);width: 100%;margin-bottom: 30px;margin-top: 30px;background-color: #7fad39;padding-top: 7px;padding-bottom:  7px;border-radius: 7px" type="submit">
                                             <span style="color: white;font-weight: 600;font-size: 21px;">Thanh Toán</span>
                                         </button>
                                     </form>
