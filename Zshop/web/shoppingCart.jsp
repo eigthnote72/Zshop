@@ -62,17 +62,23 @@
 
     </script>
 
+    <script>
+  function displayOff() {
+    document.getElementById('checkout').style.display = 'none';
+    document.getElementById('input').style.display = 'block';
+  }
+</script>
 
     <% ArrayList<ItemAddToCart> listItem = (ArrayList<ItemAddToCart>) request.getAttribute("listItem"); %>
     <% ArrayList<Category> listC = (ArrayList<Category>) request.getAttribute("listC");%>
     <% ArrayList<Category_Group> listCG = (ArrayList<Category_Group>) request.getAttribute("listCG");%>
 
 
-    
+
     <c:if test="${mess == 'done'}">
         <script type="text/javascript"> window.onload = alertName;</script> 
     </c:if>
-    
+
 
     <body>
         <!-- Header  -->
@@ -201,7 +207,7 @@
             </div>
         </section>
 
-        
+
 
 
         <!-- Breadcrumb Section End -->
@@ -225,9 +231,7 @@
                                 <tbody>
                                     <c:if test="${sessionScope.order != null}">
                                         <% for (int i = 0; i < listItem.size(); i++) {
-                                                BigInteger temp1 = new BigInteger(String.valueOf(listItem.get(i).getQuantity()));
-                                                BigInteger temp2 = new BigInteger(listItem.get(i).getPrice());
-                                                BigInteger totalI = new BigInteger("0");
+                                                
                                         %>
 
                                         <tr>
@@ -251,8 +255,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <% totalI = temp1.multiply(temp2);%>
-                                        <%      String total = totalI.toString();
+
+                                        <%  String total = listItem.get(i).getPrice();
                                             int count = 0;
                                             int count1 = 0;
                                             String price = "";
@@ -334,7 +338,7 @@
                                 <c:if test="${sessionScope.account == null}">
                                     <form action="shoppingCartControl" method="post">
                                         <div class="primary-btn" onclick="displayOff()" id="checkout"
-                                             style="border: rgba(77, 70, 70, 0.397);width: 100%;margin-bottom: 30px;margin-top: 30px;background-color: #7fad39;padding-top: 7px;padding-bottom:  7px;border-radius: 7px;color: white;font-weight: 600;font-size: 19px;text-align: center" >
+                                             style="border: rgba(77, 70, 70, 0.397);width: 100%;margin-bottom: 30px;margin-top: 30px;background-color: #7fad39;padding-top: 7px;padding-bottom:  7px;border-radius: 7px;color: white;font-weight: 600;font-size: 19px;text-align: center;cursor: pointer" >
                                             Tiến hành thanh toán
                                         </div>
                                         <div id="input" style="display: none;">

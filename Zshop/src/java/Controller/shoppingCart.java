@@ -129,10 +129,12 @@ public class shoppingCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        GetDataDAO db = new GetDataDAO();
         String button = request.getParameter("button");
         String idP = request.getParameter("idP");
         HttpSession session = request.getSession();
         Order order = (Order) request.getSession().getAttribute("order");
+        Product p =db.getProductByID(idP);
         ArrayList<ItemAddToCart> listItem = order.getItem();
         if (button.equals("-")) {
             for (int i = 0; i < listItem.size(); i++) {
@@ -141,6 +143,8 @@ public class shoppingCart extends HttpServlet {
                         listItem.remove(i);
                     } else {
                         listItem.get(i).setQuantity(listItem.get(i).getQuantity() - 1);
+                        String price = countPrice(p.getProductPrice(), listItem.get(i).getQuantity());
+                        listItem.get(i).setPrice(price);
                     }
                 }
             }
@@ -148,6 +152,8 @@ public class shoppingCart extends HttpServlet {
             for (int i = 0; i < listItem.size(); i++) {
                 if (listItem.get(i).getP().getProductID().equals(idP)) {
                     listItem.get(i).setQuantity(listItem.get(i).getQuantity() + 1);
+                    String price = countPrice(p.getProductPrice(), listItem.get(i).getQuantity());
+                    listItem.get(i).setPrice(price);
                 }
             }
         } else if (button.equals("x")) {
@@ -176,6 +182,16 @@ public class shoppingCart extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public String countPrice(String priceTotalItem, int quantity) {
+        BigInteger temp1 = new BigInteger(String.valueOf(quantity));
+        BigInteger temp2 = new BigInteger(priceTotalItem);
+        BigInteger totalI = new BigInteger("0");
+        
+        totalI = temp1.multiply(temp2);
+        String total = totalI.toString();
+        return total;
+    }
 
     public String cvString(String inputPrice) {
         int count = 0;

@@ -9,6 +9,8 @@ import Model.Account;
 import Model.Category;
 import Model.Category_Group;
 import Model.ImgProducts;
+import Model.ItemAddToCart;
+import Model.Order;
 import Model.Product;
 import java.math.BigInteger;
 import java.sql.PreparedStatement;
@@ -295,6 +297,19 @@ public class GetDataDAO extends BaseDAO {
 
         try {
             String sql = "DELETE Category_Group where CGID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, cgid);
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteImageProduct(String cgid) {
+
+        try {
+            String sql = "DELETE [ImageProduct] where CGID = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, cgid);
             statement.executeUpdate();
@@ -605,6 +620,101 @@ public class GetDataDAO extends BaseDAO {
         }
         return listP;
     }
+    
+    
+    public void insertCustomerNotLogin(Order o){
+        try {
+            String sql = "INSERT INTO Customer(customerName, [address], phone,email)\n" +
+                         "VALUES (?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, o.getName());
+            statement.setString(2, o.getAddress());
+            statement.setString(3, o.getPhone());
+            statement.setString(4, o.getEmail());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertCustomerLogin(Order o){
+        try {
+            String sql = "INSERT INTO Customer(customerName, [address], phone,email,username)\n" +
+                         "VALUES (?,?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, o.getName());
+            statement.setString(2, o.getAddress());
+            statement.setString(3, o.getPhone());
+            statement.setString(4, o.getEmail());
+            statement.setString(5, o.getUsername());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public int getCustomerID(){
+        int customerID= 0;
+        try {
+            String sql = "select max(customerID) as customerID from Customer";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                customerID = rs.getInt("customerID");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customerID;
+    }
+    
+    public int getOrderID(){
+        int orderID= 0;
+        try {
+            String sql = "select max(orderID) as orderID from [Order]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                orderID = rs.getInt("orderID");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orderID;
+    }
+    
+    public void insertOrder(int customerID){
+        try {
+            String sql = "insert into [Order](customerID)\n" +
+                         "values (?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, customerID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertOrderDetail(ItemAddToCart item,int orderID){
+        try {
+            String sql = "insert into OrderDetail (orderID,ProductID,quantity,priceOrder)\n" +
+                         "values (?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, orderID);
+            statement.setString(2, item.getP().getProductID());
+            statement.setInt(3, item.getQuantity());
+            statement.setString(4, item.getPrice());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetDataDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
 
 //    public ArrayList<ImgProducts> getImage() {
 //        ArrayList<ImgProducts> listImg = new ArrayList<>();

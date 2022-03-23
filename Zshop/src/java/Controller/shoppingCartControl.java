@@ -115,18 +115,19 @@ public class shoppingCartControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        GetDataDAO db = new GetDataDAO();
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
         Order order = (Order) session.getAttribute("order");
-        String mess ="";
+        String mess = "";
         if (order != null) {
             if (account != null) {
                 order.setAddress(account.getAddress());
                 order.setName(account.getName());
-                order.setCustomerID(account.getAccountID());
+                order.setUsername(account.getUsername());
                 order.setEmail(account.getEmail());
                 order.setPhone(account.getPhone());
+                db.insertCustomerLogin(order);
             } else {
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");
@@ -136,17 +137,27 @@ public class shoppingCartControl extends HttpServlet {
                 order.setEmail(email);
                 order.setPhone(phone);
                 order.setAddress(address);
+                db.insertCustomerNotLogin(order);
+            }
+
+            int customerID = db.getCustomerID();
+            db.insertOrder(customerID);
+            int orderID = db.getOrderID();
+            ArrayList<ItemAddToCart> listItem = order.getItem();
+            for (int i = 0; i < listItem.size(); i++) {
+                ItemAddToCart item = listItem.get(i);
+                db.insertOrderDetail(item, orderID);
             }
 
             // viết thêm hàm để lưu data order vào database (thiếu code)
             session.removeAttribute("order");
-            
-            mess ="done";
-            
-        }else{
+
+            mess = "done";
+
+        } else {
             mess = "failed";
         }
-        
+
         request.getSession().setAttribute("mess", mess);
 
         response.sendRedirect("shoppingCart");

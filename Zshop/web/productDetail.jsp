@@ -61,21 +61,21 @@
 
 
         });
-        
-        function up(){
+
+        function up() {
             var quantity = document.getElementById("quantity").value;
             document.getElementById("quantity").value = ++quantity;
         }
-        function down(){
-            
+        function down() {
+
             var quantity = document.getElementById("quantity").value;
-            if(quantity >1){
+            if (quantity > 1) {
                 document.getElementById("quantity").value = --quantity;
-            }else{
+            } else {
                 document.getElementById("quantity").value = quantity;
             }
-            
-            
+
+
         }
     </script>
     <body>
@@ -94,33 +94,33 @@
 
 
                                 <ul class="dropdown-menu ac" >
-                                    <%int a =10;%>
-                                    <% for(int i = 0 ; i<listC.size();i++){
-                                       
-                                    
-                                    %>
-                                        <li>
-                                            <div class="dropend">
-                                                <a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>"><%=listC.get(i).getcName()%><i class="bi bi-chevron-right" style="float: right;font-size: 13px"></i></a>
-                                                
-                                                <ul class="dropdown-menu abc" style="margin-top: -<%=a%>px;min-height: 175px"> 
-                                                    <%for(int j = 0 ;j<listCG.size();j++){%>
-                                                        <% if(listC.get(i).getcID().equals(listCG.get(j).getCID())) {%>
-                                                        <li><a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>&cgid=<%=listCG.get(j).getCGID()%>"><%=listCG.get(j).getCGName()%></a></li>
-                                                        <%}%>
-                                                    <%}
-                                                    a=a+30+1;
-                                                    %>
-                                                </ul>
+                                    <%int a = 10;%>
+                                    <% for (int i = 0; i < listC.size(); i++) {
 
-                                            </div>
-                                        </li>
+
+                                    %>
+                                    <li>
+                                        <div class="dropend">
+                                            <a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>"><%=listC.get(i).getcName()%><i class="bi bi-chevron-right" style="float: right;font-size: 13px"></i></a>
+
+                                            <ul class="dropdown-menu abc" style="margin-top: -<%=a%>px;min-height: 175px"> 
+                                                <%for (int j = 0; j < listCG.size(); j++) {%>
+                                                <% if (listC.get(i).getcID().equals(listCG.get(j).getCID())) {%>
+                                                <li><a class="dropdown-item" href="home/brand?cid=<%=listC.get(i).getcID()%>&cgid=<%=listCG.get(j).getCGID()%>"><%=listCG.get(j).getCGName()%></a></li>
+                                                    <%}%>
+                                                    <%}
+                                                        a = a + 30 + 1;
+                                                    %>
+                                            </ul>
+
+                                        </div>
+                                    </li>
 
 
                                     <%}%>
                                 </ul>
                             </div>
-                                <a href="home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px" title="Home">Zshop</a>
+                            <a href="home" style="font-size: 30px; color:white ;text-decoration: none; margin-left: 5px" title="Home">Zshop</a>
 
                         </div>
 
@@ -188,10 +188,15 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="images p-3 text-center ">
-                                    <div class="text-center p-4"> <img id="main-image" src="${listImg.get(1)}" width="250" height="250" /> </div>
-                                        <c:forEach var="o" items="${listImg}" >
-                                        <div class="thumbnail text-center" style="display: inline"> <img onclick="change_image(this)" src="${o}" width="70" height="70"></div> 
-                                        </c:forEach>
+                                    <c:if test="${not empty listImg}">
+                                        <div class="text-center p-4"> <img id="main-image" src="${listImg.get(1)}" width="250" height="250" /> </div>
+                                            <c:forEach var="o" items="${listImg}" >
+                                            <div class="thumbnail text-center" style="display: inline"> <img onclick="change_image(this)" src="${o}" width="70" height="70"></div> 
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${empty listImg}">
+                                            <div class="text-center p-4"> <img id="main-image" src="${p.getImage()}" width="250" height="250" /> </div>
+                                    </c:if>
 
                                 </div>
                             </div>

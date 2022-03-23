@@ -49,7 +49,9 @@ public class deleteCategory_Group extends HttpServlet {
                     db.deleteProduct(listP.get(i).getProductID());
                 }
             }
+            db.deleteImageProduct(cgid);
             db.deleteCategory_Group(cgid);
+            
             String messCG = "Xóa thành công Category_Group có ID : " + cgid +  "\n và các sản phẩm tương ứng";
             request.getSession().setAttribute("messCG", messCG);
             response.sendRedirect("category_groupManager");
